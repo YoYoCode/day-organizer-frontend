@@ -1,0 +1,24 @@
+@import "./styles/shared.scss";
+
+.#{$Dark} {
+  background: #4a4a49;
+  .login-card, .signup-card {
+    background: #4a4a49 url("../assets/form-dark-background.svg") top left no-repeat;
+    h1 {
+      background: url("../assets/form-title-background.png") no-repeat;
+      filter: invert(1);
+    }
+    .theme-btn {
+      background: url("../assets/form-title-background.png") no-repeat;
+      filter: invert(1);
+    }
+    input {
+      background: #110e0c90 !important;
+      border: white solid 1px !important;
+      color: white;
+    }
+    input::placeholder {
+      color: white;
+    }
+  }
+}

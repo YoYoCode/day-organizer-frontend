@@ -1,0 +1,44 @@
+$Light: lightWhite;
+
+$Dark: darkBlack;
+
+.login-card, .signup-card {
+  background-size: contain !important;
+  background-position: center !important;
+  border: transparent !important;
+  text-align: center !important;
+  h1 {
+    margin: 0px auto 2rem;
+    padding: 1rem;
+    background-position: center !important;
+    background-size: 50% !important;
+  }
+  input {
+    margin: auto;
+
+    &:focus::placeholder {
+      transform: translateY(-70px);
+    }
+  }
+  .invalid-feedback {
+    font-weight: bold;
+  }
+  input::placeholder {
+    transition: all .4s ease;
+    font-weight: 400;
+    text-align: center;
+  }
+  .theme-btn {
+    margin: auto !important;
+    display: block;
+    background-size: cover;
+    padding: 1rem;
+    border: unset !important;
+    font-weight: 600;
+    color: black;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
