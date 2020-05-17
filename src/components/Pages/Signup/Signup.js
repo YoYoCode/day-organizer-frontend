@@ -61,10 +61,9 @@ export default class Signup extends Component {
       <div className='app flex-row align-items-center'>
         <Container fluid>
           <Row className='justify-content-center'>
-            <Col xs='5'>
               <CardGroup>
                 <Card className="signup-card">
-                  <CardBody style={{ padding: '4rem' }}>
+                  <CardBody>
                     <AvForm
                       onSubmit={this.handleSubmit}
                       ref={c => {
@@ -79,7 +78,6 @@ export default class Signup extends Component {
                               name='username'
                               id='signup-username'
                               placeholder='Enter Email'
-                              style={{ width: '400px' }}
                               required
                             />
                             <AvFeedback>Please enter Username</AvFeedback>
@@ -93,7 +91,6 @@ export default class Signup extends Component {
                               type='password'
                               name='password'
                               id='signup-password'
-                              style={{ width: '400px' }}
                               placeholder='Enter Password'
                               required
                             />
@@ -108,7 +105,6 @@ export default class Signup extends Component {
                               type='password'
                               name='reconfirmPassword'
                               id='reconfirm-password'
-                              style={{ width: '400px' }}
                               placeholder='Re-confirm Password'
                               required
                             />
@@ -117,7 +113,7 @@ export default class Signup extends Component {
                         </Col>
                       </Row>
                       <Row style={{ paddingLeft: '15px' }}>
-                        <Button className='px-4 text-right light-theme-btn'>
+                        <Button className='px-4 text-right  theme-btn'>
                           Submit
                         </Button>
                       </Row>
@@ -132,7 +128,6 @@ export default class Signup extends Component {
                   </CardBody>
                 </Card>
               </CardGroup>
-            </Col>
           </Row>
         </Container>
       </div>

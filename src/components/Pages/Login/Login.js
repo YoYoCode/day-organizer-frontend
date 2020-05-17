@@ -19,6 +19,7 @@ export default class Login extends Component {
     try {
       const res = await Dunzo.loginUser({ ...values });
       if (_.has(res, ['data', 'data', 'token'])) {
+        localStorage.setItem('token', res.data.data.token);
         history.push({ pathname: '/todoist' });
       }
     } catch (error) {
@@ -45,10 +46,9 @@ export default class Login extends Component {
       <div className='app flex-row align-items-center'>
         <Container fluid>
           <Row className='justify-content-center'>
-            <Col xs='5'>
               <CardGroup>
                 <Card className="login-card">
-                  <CardBody style={{ padding: '4rem' }}>
+                  <CardBody>
                     <AvForm
                       onSubmit={this.handleSubmit}
                       ref={c => {
@@ -63,7 +63,6 @@ export default class Login extends Component {
                               name='username'
                               id='login-username'
                               placeholder='Enter Username'
-                              style={{ width: '400px' }}
                               required
                             />
                             <AvFeedback>Please enter Username</AvFeedback>
@@ -77,7 +76,6 @@ export default class Login extends Component {
                               type='password'
                               name='password'
                               id='login-password'
-                              style={{ width: '400px' }}
                               placeholder='Enter Password'
                               required
                             />
@@ -104,7 +102,6 @@ export default class Login extends Component {
                   </CardBody>
                 </Card>
               </CardGroup>
-            </Col>
           </Row>
         </Container>
       </div>

@@ -43,7 +43,7 @@ export default class App extends BrowserRouter {
     super();
     this.themeComponent = new UIThemeSwitcher('darkBlack');
     this.themeComponent.register(document.getElementsByTagName('body')[0]);
-    this.themeComponent.setTheme(document.getElementsByTagName('body')[0], 'darkBlack');
+   // this.themeComponent.setTheme(document.getElementsByTagName('body')[0], 'darkBlack');
   }
 
   render() {

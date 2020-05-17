@@ -5,7 +5,7 @@ const Dunzo = {
   loginUser: async userCredentials => {
     return axios({
       method: 'POST',
-      url: 'http://localhost:8080/auth/login',
+      url: 'https://todo-hackathon.herokuapp.com/auth/login',
       data: userCredentials,
     });
   },
@@ -13,7 +13,7 @@ const Dunzo = {
   signUpUser: async userCredentials => {
     return axios({
       method: 'POST',
-      url: 'http://localhost:8080/auth/signup',
+      url: 'https://todo-hackathon.herokuapp.com/api/v1/users',
       data: userCredentials,
     });
   },

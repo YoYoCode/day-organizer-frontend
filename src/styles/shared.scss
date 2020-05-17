@@ -2,11 +2,15 @@ $Light: lightWhite;
 
 $Dark: darkBlack;
 
-.login-card, .signup-card {
+.card-group {
   background-size: contain !important;
   background-position: center !important;
   border: transparent !important;
   text-align: center !important;
+  width:90%;
+  margin: 0 auto;
+  max-width: 40rem;   
+  padding: 4rem;
   h1 {
     margin: 0px auto 2rem;
     padding: 1rem;
@@ -14,8 +18,8 @@ $Dark: darkBlack;
     background-size: 50% !important;
   }
   input {
-    margin: auto;
-
+    margin:0 auto;
+    width: 60% !important;
     &:focus::placeholder {
       transform: translateY(-70px);
     }
@@ -31,7 +35,7 @@ $Dark: darkBlack;
   .theme-btn {
     margin: auto !important;
     display: block;
-    background-size: cover;
+    background-size: cover !important;
     padding: 1rem;
     border: unset !important;
     font-weight: 600;
@@ -39,6 +43,42 @@ $Dark: darkBlack;
 
     &:hover {
       text-decoration: underline;
+    }
+  }
+}
+
+
+ 
+
+.form-control{
+  width: unset;
+}
+.card{
+  border:0 !important;
+  background: transparent;
+}
+
+@media only screen and (max-width: 768px) {
+  .card-group {
+    padding: 0 !important;
+    background-size: cover !important;
+    font-size: .75rem !important;
+    h1{
+      font-size: 1rem;
+      font-weight: bold;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+    .theme-btn,input::placeholder{
+      font-size: .75rem !important; 
+      padding: .75rem;
+    }
+    input{
+      padding:.25rem; 
+      width: 80% !important;
+    }
+    .form-group{
+      margin-bottom: 0;
     }
   }
 }
