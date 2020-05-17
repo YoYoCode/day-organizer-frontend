@@ -86,11 +86,11 @@ export default class Login extends Component {
                         </Col>
                       </Row>
                       <Row style={{ paddingLeft: '15px' }}>
-                        <Button color='primary' className='px-4 light-theme-btn' style={{ marginRight: '20px' }}>
+                        <Button color='primary' className='px-4 theme-btn' style={{ marginRight: '20px' }}>
                           Login
                         </Button>
-                        <Button color='primary' className='px-4 text-right light-theme-btn' onClick={this.signup}>
-                          Register
+                        <Button color='primary' className='px-4 text-right theme-btn' onClick={this.signup}>
+                        Create Account
                         </Button>
                       </Row>
                     </AvForm>

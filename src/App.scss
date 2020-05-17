@@ -1,5 +1,7 @@
 // Import Bootstrap and its default variables
 @import '~bootstrap/scss/bootstrap.scss';
+@import "./styles/dark.scss";
+@import "./styles/light.scss";
 
 html body .app.flex-row.align-items-center {
   height: 100vh;
@@ -7,52 +9,5 @@ html body .app.flex-row.align-items-center {
 }
 
 body {
-  // background: #e4dfd6 url("./assets/todoist-light-theme-bg.jpg") top left;
-  // background: #e4dfd6 url("https://i.ibb.co/8DmGkCD/image.png") top left no-repeat;
-  background: #eeebe4;
-  background-size: cover;
   font-family: "Crimson Text", Georgia, Times, "Times New Roman", serif;
-}
-
-.login-card, .signup-card {
-  // background-color: transparent !important;
-  background: #eeebe4 url("https://jrsinclair.com/assets/code-med.svg") top left no-repeat;
-  background-size: contain;
-  border: transparent !important;
-  text-align: center;
-  h1 {
-    margin: 0px auto 2rem;
-    background: url("https://i.ibb.co/K2jYb29/image.png") no-repeat;
-    padding: 1rem;
-    background-position: center;
-    background-size: 50%;
-  }
-  input  {
-    background: #f3cab190 !important;
-    margin: auto;
-    border: black solid 1px !important;
-    color: black;
-
-    &:focus::placeholder {
-      color: transparent;
-    }
-  }
-  .invalid-feedback {
-    font-weight: bold;
-  }
-  input::placeholder {
-    color: #000000;
-    font-weight: 400;
-    text-align: center;
-  }
-  .light-theme-btn {
-    margin: auto !important;
-    display: block;
-    color: black;
-    background: url(https://i.ibb.co/K2jYb29/image.png) no-repeat;
-    background-size: cover;
-    padding: 1rem;
-    border: unset !important;
-    font-weight: 600;
-  }
 }

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Router } from 'react-router';
 import { createBrowserHistory } from 'history';
+import UIThemeSwitcher from './styles/ui-theme-change';
 import './App.scss';
 
 const loading = () => {
@@ -38,6 +39,13 @@ const Page404 = React.lazy(() => import('./components/Pages/Page404/Page404'));
 const Page500 = React.lazy(() => import('./components/Pages/Page500/Page500'));
 
 export default class App extends BrowserRouter {
+  constructor() {
+    super();
+    this.themeComponent = new UIThemeSwitcher('darkBlack');
+    this.themeComponent.register(document.getElementsByTagName('body')[0]);
+    this.themeComponent.setTheme(document.getElementsByTagName('body')[0], 'darkBlack');
+  }
+
   render() {
     return (
       <Router history={createBrowserHistory()}>
