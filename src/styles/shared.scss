@@ -139,3 +139,33 @@ $Dark: darkBlack;
   }
   
 }
+svg .cls-1{fill:#00c569}.cls-2{fill:#111}
+svg .cls-b{
+  transform-origin: center;
+  animation: rotateX 50s infinite ;
+}
+svg .cls-a{
+  transform-origin: center;
+  animation: rotateY 50s infinite ;
+}
+@keyframes rotateX{
+  100%{
+    transform: rotate(-1250deg);
+  }
+}
+@keyframes rotateY{
+  100%{
+    transform: rotate(1250deg);
+  }
+}
+.test-svg{
+  opacity: .4;
+  z-index: 0;
+  position: absolute;
+  left: 50%;
+  top:50%;
+  transform: translate(-50%,-50%) !important;
+}
+.todo-main-section{
+  z-index: 10;
+}
