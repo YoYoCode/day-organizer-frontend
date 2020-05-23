@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, Row, Col, Button } from 'reactstrap';
 import Todo from '../Todo/todo';
 import {Accordion, Card} from 'react-bootstrap';
-import {ReactComponent as downArrowIcon} from '../../assets/down-arrow.svg';
-
+import TodoModal from '../Todo/TodoModal/todomodal';
 const MainArea = (props) => {
+  const [modal, setModal] = useState(false);
+  const toggle = () => setModal(!modal);
 
   return (
     <Container fluid>
@@ -14,8 +15,9 @@ const MainArea = (props) => {
         </Col>
         <Col className="todo-main-section" sm="1" md="7">
           <div className="todo-section-header">
-            <Button className="todo-section-header-button btn btn-danger">Add Task</Button>
+            <Button onClick={toggle} className="todo-section-header-button btn btn-danger">Add Task</Button>
           </div>
+          <TodoModal modal={modal} toggle={toggle}/>
           <Accordion>
           <Card>
               <Accordion.Toggle className="test" as={Button} variant="link" eventKey="0">
@@ -25,6 +27,7 @@ const MainArea = (props) => {
                 <Accordion.Collapse eventKey="0">
                   <Card.Body><Todo/></Card.Body>
                 </Accordion.Collapse>
+
               </Card>
               <Card>
               <Accordion.Toggle className="test" as={Button} variant="link" eventKey="1">
