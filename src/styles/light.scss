@@ -2,6 +2,10 @@
 
 .#{$Light} {
   background: #eeebe4;
+  .labels-menu {
+    background-color: #4A4A49;
+  }
+
   .card-group {
     background: #eeebe4 url("../assets/form-light-background.svg") top left no-repeat;
     h1 {

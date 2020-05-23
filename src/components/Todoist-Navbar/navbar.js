@@ -16,7 +16,7 @@ export const TodoistNavbar = (props) => {
       const toggle = () => setIsOpen(!isOpen);
 
       return(
-        <Navbar light expand="md">
+        <Navbar light expand="md" fixed="top">
           <div className="container">
             <NavbarBrand href="/">TodoList</NavbarBrand>
         <NavbarToggler onClick={toggle} />

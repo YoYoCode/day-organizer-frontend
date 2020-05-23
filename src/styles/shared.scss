@@ -4,7 +4,8 @@ $Dark: darkBlack;
 
 .container{
   width:90%;
-  max-width: 60rem;
+  max-width: 75rem;
+  top: 40px;
   margin:0 auto;
 }
 .card-group {
@@ -52,7 +53,15 @@ $Dark: darkBlack;
   }
 }
 
+// .col-name {
+//   background: url("../assets/timer.png") center no-repeat;
+//   background-size: contain;
+// }
 
+.main-layout-row {
+  height: 100vh;
+  margin-top: 3.5rem;
+}
  
 
 .form-control{
@@ -86,6 +95,30 @@ $Dark: darkBlack;
       margin-bottom: 0;
     }
   }
-  .navbar{
+}
+
+.test {
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: black;
+  text-align: left;
+  // background-color: rgba(0, 0, 0, 0.03);
+  background-color: transparent !important;
+  border: none !important;
+  margin-top: 2rem;
+  font-size: 1.75rem;
+  &:hover, &:focus {
+    background: none !important;
+    border: none !important;
+    color: black !important;
+    box-shadow: none !important;
   }
+}
+
+.todo-section-header {
+  margin-top: 1.5rem;
+  text-align: center;
 }

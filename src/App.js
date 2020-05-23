@@ -2,7 +2,6 @@ import * as React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Router } from 'react-router';
 import { createBrowserHistory } from 'history';
-import UIThemeSwitcher from './styles/ui-theme-change';
 import './App.scss';
 import { Todoist } from './components/Todoist/todoist';
 import TodoistNavbar from './components/Todoist-Navbar/navbar';
@@ -30,9 +29,6 @@ const notAuthenticated = (createBrowserHistory, props) => {
   return <Login {...props} />;
 };
 
-// Containers
-// const DefaultLayout = React.lazy(() => import('./containers/DefaultLayout'));
-
 // Pages
 const Login = React.lazy(() => import('./components/Pages/Login/Login'));
 const Signup = React.lazy(() => import('./components/Pages/Signup/Signup'));
@@ -43,15 +39,12 @@ const Page500 = React.lazy(() => import('./components/Pages/Page500/Page500'));
 export default class App extends BrowserRouter {
   constructor() {
     super();
-    this.themeComponent = new UIThemeSwitcher('darkBlack');
-    this.themeComponent.register(document.getElementsByTagName('body')[0]);
-   // this.themeComponent.setTheme(document.getElementsByTagName('body')[0], 'darkBlack');
   }
 
   render() {
     return (
       <div>
-        <TodoistNavbar/>
+      <TodoistNavbar/>
       <Router history={createBrowserHistory()}>
         <React.Suspense fallback={loading()}>
           <Switch>
@@ -60,14 +53,14 @@ export default class App extends BrowserRouter {
             <Route exact path='/register' name='Register Page' render={props => <Register {...props} />} />
             <Route exact path='/404' name='Page 404' render={props => <Page404 {...props} />} />
             <Route exact path='/500' name='Page 500' render={props => <Page500 {...props} />} />
-            <Route exact path='/todoist' name='todoist' render={props => <Todoist {...props} />} />
-            {/* <Route
+            {/* <Route exact path='/todoist' name='todoist' render={props => <Todoist {...props} />} /> */}
+            <Route
               path='/'
               name='Login'
               render={props =>
-                loggedIn() === false ? notAuthenticated(createBrowserHistory, props) : <DefaultLayout {...props} />
+                loggedIn() === false ? notAuthenticated(createBrowserHistory, props) : <Todoist {...props} />
               }
-            /> */}
+            />
             <Route
               path='/'
               name='Login'

@@ -1,16 +1,16 @@
 .todos {
     position: relative;
     width: 100%;
-    max-width: 30rem;
+    max-width: 45rem;
     margin: 3rem auto;
    // border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 10px;
     &__todo {
-      overflow: hidden;
       list-style: none;
       position: relative;
       width: 97%;
       padding: 1.5rem 0.75rem;
+      background: white;
       margin-bottom: .75rem;
      // background:rgba(255,255,255,.85);
       border-radius: 10px;

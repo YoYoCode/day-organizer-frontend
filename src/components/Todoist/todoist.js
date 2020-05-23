@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
-import Todo from '../Todo/todo';
-//import { Container, Row } from 'reactstrap';
-
-
-
 import _ from 'lodash';
+import MainArea from '../Mainarea/Mainarea';
 
 export function Todoist() {
    
     return (
       <div>
-         <Todo/>
+         <MainArea></MainArea>
       </div>
     );
   }
