@@ -12,7 +12,6 @@ import Toggle from '../ToggleSwitch/toggle';
 
 export const TodoistNavbar = (props) => {
       const [isOpen, setIsOpen] = useState(false);
-      const [theme, setIswtichThemesOpen] = useState('lightWhite');
       const toggle = () => setIsOpen(!isOpen);
 
       return(
@@ -34,6 +33,5 @@ export const TodoistNavbar = (props) => {
         </Navbar>
       );
     }
-  
 
     export default TodoistNavbar;

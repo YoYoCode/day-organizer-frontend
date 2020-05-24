@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import { AvForm, AvField, AvGroup, AvInput, AvFeedback, AvRadioGroup, AvRadio, AvCheckboxGroup, AvCheckbox } from 'availity-reactstrap-validation';
+import { AvForm, AvField} from 'availity-reactstrap-validation';
 import DateTimePicker from 'react-datetime-picker';
 import { TwitterPicker } from 'react-color';
 import Select from 'react-dropdown-select';

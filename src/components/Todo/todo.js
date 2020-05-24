@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './todo.scss';
 import _ from 'lodash';
-import MyCalendar from '../TodoCalendar/todoCalendar';
-import DateTimePicker from 'react-datetime-picker';
 
 export class Todo extends React.Component {
   constructor(props) {

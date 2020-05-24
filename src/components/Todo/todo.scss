@@ -1,31 +1,23 @@
 .todos {
     position: relative;
     width: 100%;
-    max-width: 45rem;
-    margin: 3rem auto;
+    // max-width: 45rem;
+    margin: 0 auto;
+    padding: 0;
    // border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 10px;
     &__todo {
       list-style: none;
       position: relative;
-      width: 97%;
+      width: 100%;
       padding: 1.5rem 0.75rem;
       background: white;
       margin-bottom: .75rem;
      // background:rgba(255,255,255,.85);
       border-radius: 10px;
-      border-right: 5px solid rgba(50, 205, 50,0.6);
       -webkit-box-shadow: 0px 4px 11px 0px rgba(74,74,73,1);
     -moz-box-shadow: 0px 4px 11px 0px rgba(74,74,73,1);
     box-shadow: 0px 2px 5px -1px rgba(74,74,73,1);
-      &:hover {
-        .todos__todo-check {
-         // left: 15px;
-        }
-        .todos__todo-edit {
-          transform: scale(1.1) translatex(15px);
-        }
-      }
     }
     &__todo-body {
       display: flex;
@@ -33,45 +25,23 @@
       justify-content: space-between;
       position: relative;
       cursor: pointer;
-      width: 90%;
+      width: 95%;
       margin: 0 0 0 auto;
       padding: 0.25rem;
       border-radius: 5px;
-      &:focus {
-        border: 1px solid green;
-      }
     }
     &__todo-title {
       font-weight: 600;
       color: rgba(0, 0, 0, 0.9);
       margin: 0;
       padding: 0 0 0 0.5rem;
-      width: 70%;
+      width: 100%;
       font-size: 1rem;
       &:focus {
         outline-color: transparent;
         font-style: italic;
-        caret-color: green;
-        letter-spacing: 0.5px;
+        caret-color: #4a4a49;
       }
-    }
-    &__todo-date {
-      width: 36%;
-      background: transparent;
-      border: none;
-      &:focus {
-        outline-color: transparent;
-      }
-    }
-    &__todo-modal {
-      width: 50vw;
-      height: 50vh;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      position: fixed;
-      background: red;
-      display: none;
     }
     &__todo-edit {
       position: absolute;
@@ -80,24 +50,6 @@
       cursor: pointer;
       transform: translateX(50px);
       transition: all 0.3s linear;
-    }
-    &__todos-edit {
-      display: block;
-      position: absolute;
-      left: 20px;
-      top: 20px;
-      transition: all 0.3s linear;
-      &:hover {
-        svg {
-          transform: scale(1.1);
-        }
-      }
-      &.scale {
-        transform: scale(1.5);
-        svg path {
-          fill: red;
-        }
-      }
     }
     &__todo-check {
       position: absolute;
@@ -134,49 +86,30 @@
       opacity: 0;
     }
   }
-  a {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 0.75rem;
-    margin:  auto;
-    text-align: center;
-  }
   
-  ::-webkit-datetime-edit {
-      font-size: .75rem;
-    padding: 0.25em;
-  }
-  ::-webkit-datetime-edit-fields-wrapper {
-    background: transparent;
-  }
-  ::-webkit-datetime-edit-text {
-    color: black;
-    padding: 0 0.3em;
-  }
-  ::-webkit-datetime-edit-month-field {
-    color: black;
-  }
-  ::-webkit-datetime-edit-day-field {
-    color: black;
-  }
-  ::-webkit-datetime-edit-year-field {
-    color: black;
-  }
-  ::-webkit-inner-spin-button {
-    display: none;
-  }
-  ::-webkit-calendar-picker-indicator {
-    background: transparent;
-  }
-  
-  .add-task{
-      margin: 2rem;
-      display: block;
-      font-size: 1.25rem;
-      color: black;
-      &:hover{
-          text-decoration: underline;
-          color: black;
-      }
-  }
+  // ::-webkit-datetime-edit {
+  //     font-size: .75rem;
+  //   padding: 0.25em;
+  // }
+  // ::-webkit-datetime-edit-fields-wrapper {
+  //   background: transparent;
+  // }
+  // ::-webkit-datetime-edit-text {
+  //   color: black;
+  //   padding: 0 0.3em;
+  // }
+  // ::-webkit-datetime-edit-month-field {
+  //   color: black;
+  // }
+  // ::-webkit-datetime-edit-day-field {
+  //   color: black;
+  // }
+  // ::-webkit-datetime-edit-year-field {
+  //   color: black;
+  // }
+  // ::-webkit-inner-spin-button {
+  //   display: none;
+  // }
+  // ::-webkit-calendar-picker-indicator {
+  //   background: transparent;
+  // }

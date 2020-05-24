@@ -70,6 +70,9 @@ $Dark: darkBlack;
 .card{
   border:0 !important;
   background: transparent;
+  .card-body {
+    border: 2px solid #dc3546b6 !important;
+  }
 }
 
 @media only screen and (max-width: 768px) {
@@ -97,23 +100,50 @@ $Dark: darkBlack;
   }
 }
 
-.test {
+.section-toggle {
+  border-bottom-left-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+}
+
+.accordion {
+  margin: 10px 40px;
+  svg {
+    path {
+      fill: #eeebe4 !important;
+    }
+  }
+}
+
+.overdue-section-btn {
+  .section-toggle {
+    background-color: #dc3546b6 !important;
+    &:hover, &:focus {
+      color: #eeebe4 !important;
+      background-color: #dc3546b6 !important;
+    }
+  }
+}
+
+.section-btn {
+  .card-body {
+    border: 0 !important;
+    // border-bottom: 2px solid #045591 !important;
+  }
+}
+
+.section-toggle {
   padding: 0.75rem 1.25rem;
   margin-bottom: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: black;
   text-align: left;
-  // background-color: rgba(0, 0, 0, 0.03);
-  background-color: transparent !important;
   border: none !important;
   margin-top: 2rem;
-  font-size: 1.75rem;
+  font-size: 1.25rem;
   &:hover, &:focus {
     background: none !important;
     border: none !important;
-    color: black !important;
     box-shadow: none !important;
   }
 }
@@ -123,7 +153,7 @@ $Dark: darkBlack;
   text-align: center;
 }
 
-.modal-dialog{
+.modal-dialog {
   left: 50%;
   top:50%;
   transform: translate(-50%,-50%) !important;
@@ -137,35 +167,4 @@ $Dark: darkBlack;
   svg{
     //opacity: .5;
   }
-  
-}
-svg .cls-1{fill:#00c569}.cls-2{fill:#111}
-svg .cls-b{
-  transform-origin: center;
-  animation: rotateX 50s infinite ;
-}
-svg .cls-a{
-  transform-origin: center;
-  animation: rotateY 50s infinite ;
-}
-@keyframes rotateX{
-  100%{
-    transform: rotate(-1250deg);
-  }
-}
-@keyframes rotateY{
-  100%{
-    transform: rotate(1250deg);
-  }
-}
-.test-svg{
-  opacity: .4;
-  z-index: 0;
-  position: absolute;
-  left: 50%;
-  top:50%;
-  transform: translate(-50%,-50%) !important;
-}
-.todo-main-section{
-  z-index: 10;
 }
