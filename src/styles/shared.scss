@@ -50,6 +50,9 @@ $Dark: darkBlack;
     &:hover {
       text-decoration: underline;
     }
+    &:focus {
+      outline: 0 !important;
+    }
   }
 }
 
@@ -93,6 +96,7 @@ $Dark: darkBlack;
     input{
       padding:.25rem; 
       width: 80% !important;
+      overflow: hidden;
     }
     .form-group{
       margin-bottom: 0;

@@ -48,7 +48,7 @@ export default class Login extends Component {
           <Row className='justify-content-center'>
               <CardGroup>
                 <Card className="login-card">
-                  <CardBody>
+                  <CardBody className="login-card-body">
                     <AvForm
                       onSubmit={this.handleSubmit}
                       ref={c => {

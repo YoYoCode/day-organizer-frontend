@@ -63,7 +63,7 @@ export default class Signup extends Component {
           <Row className='justify-content-center'>
               <CardGroup>
                 <Card className="signup-card">
-                  <CardBody>
+                  <CardBody className="signup-card-body">
                     <AvForm
                       onSubmit={this.handleSubmit}
                       ref={c => {
