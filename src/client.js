@@ -2,6 +2,7 @@
 const publicVapidKey =
   'BGO4zJnXGHGmiFLr01qVjE7B7Z6asmeuInstPJbwCBJCTw90WJiVuFeVBAORwmvSxiVbTHFAKCDwtSicedcmuQ8';
 
+const {Dunzo} = require('./services/api.js');
 export function register(user) {
   if ('serviceWorker' in navigator) {
     console.log('Registering service worker');
@@ -54,13 +55,7 @@ export function register(user) {
 
         console.log('Sending push');
 
-        await fetch('http://localhost:3000/api/v1/subscribe', {
-          method: 'POST',
-          body: JSON.stringify({subscription, user}),
-          headers: {
-            'content-type': 'application/json',
-          },
-        });
+        await Dunzo.notificationSubscriber({subscription, user});
 
         console.log('Sent push');
       }

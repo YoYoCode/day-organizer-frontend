@@ -2,7 +2,7 @@ import axios from 'axios';
 import courier from './stockeryClient';
 
 const Dunzo = {
-  loginUser: async userCredentials => {
+  loginUser: async (userCredentials) => {
     return axios({
       method: 'POST',
       url: 'https://todo-hackathon.herokuapp.com/auth/login',
@@ -10,13 +10,21 @@ const Dunzo = {
     });
   },
 
-  signUpUser: async userCredentials => {
+  signUpUser: async (userCredentials) => {
     return axios({
       method: 'POST',
       url: 'https://todo-hackathon.herokuapp.com/api/v1/users',
       data: userCredentials,
     });
   },
+
+  notificationSubscriber: async (subscription) => {
+    return axios({
+      method: 'POST',
+      url: 'https://todo-hackathon.herokuapp.com/api/v1/subscribe',
+      data: subscription,
+    });
+  },
 };
 
-export { Dunzo };
+export {Dunzo};
