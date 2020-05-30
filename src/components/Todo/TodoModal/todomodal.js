@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { AvForm, AvField} from 'availity-reactstrap-validation';
-import DateTimePicker from 'react-datetime-picker';
-import { TwitterPicker } from 'react-color';
+import TimePicker from 'react-time-picker';
+import DatePicker from 'react-date-picker';
 import Select from 'react-dropdown-select';
 
 const TodoModal = (props) => {
@@ -20,15 +20,16 @@ const TodoModal = (props) => {
     }];
 
   const [modal, setModal] = useState(false);
+  const [value, onChange] = useState('23:59');
   const Flag= props=>(
     <svg height="24" width="24" version="1.1" {...props}>
         <g transform="translate(0 -1028.4)">
-        <rect height="22" width="1" y="1030.4" x="3" fill="#ecf0f1"/>
+        <rect height="22" width="1" y="1030.4" x="3" fill="fill"/>
         <path d="m17.5 1030.4c-2.25 0-4.5 1.1-4.5 1.1s-2.25 1.1-4.5 1.1-4.5-1.1-4.5-1.1v13.7s2.25 1.2 4.5 1.2 4.5-1.2 4.5-1.2 2.25-1.1 4.5-1.1 4.5 1.1 4.5 1.1v-13.7s-2.25-1.1-4.5-1.1z" fill="fill" opacity='opacity'/>
-        <rect height="22" width="1" y="1030.4" x="2" fill="#bdc3c7"/>
-        <path d="m17.5 1043.2c-2.25 0-4.5 1.2-4.5 1.2s-2.25 1.1-4.5 1.1-4.5-1.1-4.5-1.1v1s2.25 1.1 4.5 1.1 4.5-1.1 4.5-1.1 2.25-1.2 4.5-1.2 4.5 1.2 4.5 1.2v-1s-2.25-1.2-4.5-1.2z" fill="#16a085"/>
-        <path d="m3 1029.4c-0.5523 0-1 0.4-1 1h2c0-0.6-0.4477-1-1-1z" fill="#95a5a6"/>
-        <path d="m3 1029.4v1h1c0-0.6-0.4477-1-1-1z" fill="#bdc3c7"/>
+        <rect height="22" width="1" y="1030.4" x="2"  fill="fill"/>
+        <path d="m17.5 1043.2c-2.25 0-4.5 1.2-4.5 1.2s-2.25 1.1-4.5 1.1-4.5-1.1-4.5-1.1v1s2.25 1.1 4.5 1.1 4.5-1.1 4.5-1.1 2.25-1.2 4.5-1.2 4.5 1.2 4.5 1.2v-1s-2.25-1.2-4.5-1.2z"  fill="fill"/>
+        <path d="m3 1029.4c-0.5523 0-1 0.4-1 1h2c0-0.6-0.4477-1-1-1z"  fill="fill"/>
+        <path d="m3 1029.4v1h1c0-0.6-0.4477-1-1-1z"  fill="fill"/>
         </g>
     </svg>
   );
@@ -38,22 +39,23 @@ const TodoModal = (props) => {
       <Modal isOpen={props.modal} toggle={props.toggle} className={className}>
         <ModalHeader toggle={props.toggle}>Add Todo</ModalHeader>
         <ModalBody>
-        <AvForm>
-        <AvField name="name" label="Name" required />
-        <div>
+         <div className="text-center py-6">
+          <span className="todo-modal-label">Todo Title</span>
+          <textarea></textarea>
+        </div> 
+        
+        <div className="text-center py-6">
             <span className="todo-modal-label">Schedule</span>
-            <DateTimePicker />
+            <DatePicker/>
+            <TimePicker onChange={onChange} value={value}/>
         </div>
-        <div>
+        <div className="text-center py-6">
             <span className="todo-modal-label">Priority</span>
             <span>
-                <a><Flag fill="#FF0000" opacity="0.3"/></a>
-                <a><Flag fill="#00FF00"/></a>
-                <a><Flag fill="#0000FF"/></a>
+                <a><Flag fill="red" opacity="0.5"/></a>
+                <a><Flag fill="orange"/></a>
+                <a><Flag fill="green"/></a>
             </span>
-        </div>
-        <div>
-            <TwitterPicker />
         </div>
         <div>
             <Select
@@ -61,10 +63,9 @@ const TodoModal = (props) => {
                 options={options}
             />
         </div>
-        </AvForm>
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={props.toggle}>Apply changes</Button>{' '}
+          <Button className="red" onClick={props.toggle}>Apply changes</Button>{' '}
           <Button color="secondary" onClick={props.toggle}>Cancel</Button>
         </ModalFooter>
       </Modal>
