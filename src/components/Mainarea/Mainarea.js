@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Button } from 'reactstrap';
 import TodoModal from '../Todo/TodoModal/todomodal';
 import TodoCard from '../Todo/TodoCard/TodoCard';
+import Pomodoro from '../Pomodoro/pomodoro';
 
 const MainArea = (props) => {
   const [modal, setModal] = useState(false);
@@ -31,7 +32,8 @@ const MainArea = (props) => {
             <TodoCard sectionName='Overmorrow' defaultActiveKey='0'></TodoCard>
           </div>
         </Col>
-        <Col className="labels-menu" sm="2" md="3">
+        <Col className="labels-menu pomodoro" sm="2" md="3">
+          <Pomodoro></Pomodoro>
         </Col>
       </Row>
     </Container>
