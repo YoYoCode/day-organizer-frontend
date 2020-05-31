@@ -16,8 +16,9 @@ export class Todo extends React.Component {
       <div className="todo-card">
         <ul className="todos">
           <li className="todos__todo">
-            <span className="todos__todo-check" title="Complete this Todo"> </span>
+           
             <div className="todos__todo-body">
+              <span className="todos__todo-check" title="Complete this Todo"> </span>
               <h3 className="todos__todo-title" contentEditable="true" suppressContentEditableWarning={true}>
               start dieting
               </h3>

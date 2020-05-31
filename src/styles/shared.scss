@@ -83,31 +83,6 @@ $Dark: darkBlack;
   }
 }
 
-@media only screen and (max-width: 768px) {
-  .card-group {
-    padding: 0 !important;
-    background-size: cover !important;
-    font-size: .75rem !important;
-    h1{
-      font-size: 1rem;
-      font-weight: bold;
-      margin-top: 1rem;
-      margin-bottom: 1rem;
-    }
-    .theme-btn,input::placeholder{
-      font-size: .75rem !important; 
-      padding: .75rem;
-    }
-    input{
-      padding:.25rem; 
-      width: 80% !important;
-      overflow: hidden;
-    }
-    .form-group{
-      margin-bottom: 0;
-    }
-  }
-}
 
 .section-toggle {
   border-bottom-left-radius: 0px !important;
@@ -357,4 +332,82 @@ $Dark: darkBlack;
   margin-right: 0.5rem;
   width: 24px !important;
   height: 24px !important;
+}
+
+
+@media only screen and (max-width: 768px) {
+  .accordion{
+    margin:10px 0;
+  }
+  .card-body{
+    padding:1.25rem 0.25rem;
+  }
+  .todos__todos-edit {
+    svg {
+      transform:translateX(0);
+    }
+  }
+  .todos__todo-duedate-text{
+    font-size: 10px;
+  }
+  .svg-fill {
+    display: inline-block;
+    vertical-align: middle;
+    svg {
+      width: 10px !important;
+      height: 10px !important;
+    }
+  }
+  .todos__todo{
+    padding: 2.5rem .5rem .75rem !important;
+  }
+  .todos__todo-check{
+    left:-10px !important;
+    top: 70% !important;
+    transform:translateY(-70%) !important;
+  }
+  .todos__todo-title{
+    padding-left: 1rem !important; 
+  }
+  .card-group {
+    padding: 0 !important;
+    background-size: cover !important;
+    font-size: .75rem !important;
+    h1{
+      font-size: 1rem;
+      font-weight: bold;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+    .theme-btn,input::placeholder{
+      font-size: .75rem !important; 
+      padding: .75rem;
+    }
+    input{
+      padding:.25rem; 
+      width: 80% !important;
+      overflow: hidden;
+    }
+    .form-group{
+      margin-bottom: 0;
+    }
+  }
+}
+
+@media only screen and (max-width: 1150px) {
+  .row{
+   display: block;;
+  }
+  .labels-menu,.todo-main-section{
+    width: 100% !important;
+    max-width: 50rem !important;
+    margin: 0 auto !important;
+    flex: 1;
+  }
+  .labels-menu{
+    max-width: 100% !important;
+  }
+}
+.labels-menu{
+  padding:1.5rem;
 }

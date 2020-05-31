@@ -11,7 +11,7 @@ const MainArea = (props) => {
   return (
     <Container fluid>
       <Row className='main-layout-row'>
-        <Col sm="2" md="2" className="labels-menu">
+        <Col sm="2" md="2" className="labels-menu lebels-menu--left">
 
         </Col>
         <Col className="todo-main-section" sm="7" md="7">
