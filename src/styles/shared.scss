@@ -70,13 +70,16 @@ $Dark: darkBlack;
 .form-control{
   width: unset;
 }
-.card{
-  border:0 !important;
-  background: transparent;
-  .card-body {
-    border: 2px solid #b23b47 !important;
-    max-height: 350px;
-    overflow: auto;
+
+.accordion {
+  .card{
+    border:0 !important;
+    background-color: transparent !important;
+    .card-body {
+      // border: 2px solid #b23b47 !important;
+      max-height: 450px;
+      overflow: auto;
+    }
   }
 }
 
@@ -113,7 +116,7 @@ $Dark: darkBlack;
 
 .accordion {
   margin: 10px 40px;
-  svg {
+  .accordion-arrow {
     path {
       fill: #eeebe4 !important;
     }
@@ -127,6 +130,9 @@ $Dark: darkBlack;
       color: #eeebe4 !important;
       background-color: #b23b47 !important;
     }
+  }
+  .card-body {
+    border: 2px solid #b23b47 !important;
   }
 }
 
@@ -170,7 +176,7 @@ $Dark: darkBlack;
   transform: translate(-50%,-50%) !important;
   margin:0;
   width:80% !important;
-  max-width: 35rem !important;
+  max-width: 40rem !important;
   .todo-modal-label{
     display: block;
     margin-bottom: 0.3rem;
@@ -183,6 +189,7 @@ $Dark: darkBlack;
     width:98%;
     margin:0 auto;
     border: 1px solid #ccc !important;
+    background-color: rgba(238, 235, 228, 0.5) !important;
     }
     .modal-body{
       width: 90%;
@@ -194,10 +201,12 @@ $Dark: darkBlack;
       margin-right: 0.5rem;
     }
     .react-date-picker__wrapper{
+      background-color: rgba(238, 235, 228, 0.5) !important;
       padding: .5rem .25rem !important;
       border: 1px solid #ccc !important;
     }
     .react-time-picker__wrapper{
+      background-color: rgba(238, 235, 228, 0.5) !important;
       padding: .5rem .25rem !important;
       border: 1px solid #ccc !important;
     }
@@ -205,6 +214,7 @@ $Dark: darkBlack;
       margin:0 1rem;
     }
     .react-dropdown-select{
+      background-color: rgba(238, 235, 228, 0.5) !important;
       padding: 0.5rem;
     }
     .red{
@@ -273,4 +283,78 @@ $Dark: darkBlack;
     border-radius: 4px;
     border: 0;
   }
+}
+
+.todos__todo-label-edit-section {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 14px !important;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  display: flex;
+}
+
+.todos__todo_details_section {
+  .todos__todo-timer-logo {
+    background-color: rgb(74, 74, 73);
+    margin-right: .5rem;
+    padding-left: 5px;
+  }
+
+  .todos__todo-duedate-text {
+    margin-right: .5rem;
+    margin-left: 0px;
+    // font-weight: bold;
+    color: #eeebe4;
+    display: inline-block;
+    vertical-align: middle;
+    padding-left: 5px;
+  }
+}
+
+.todo-label {
+  margin-right: .5rem;
+  padding-left: 5px;
+  background: #045591 !important;
+  color: #eeebe4;
+  .todo-label-text {
+    vertical-align: middle;
+    margin-right: .5rem;
+    padding-left: 5px;
+  }
+}
+
+.svg-fill {
+  display: inline-block;
+  vertical-align: middle;
+  svg {
+    width: 16px !important;
+    height: 16px !important;
+    path {
+      fill: #eeebe4 !important;
+    }
+  }
+}
+
+.todos__todos-edit {
+  svg {
+    width: 24px !important;
+    height: 24px !important;
+    transition: all .5s ease;
+    transform: translateX(60px);
+    path {
+      fill: #4A4A49 !important;
+    }
+  }
+  &:hover {
+    svg {
+      transform: scale(1.2) !important;
+    }
+  }
+}
+
+.todos__priority-flag {
+  margin-right: 0.5rem;
+  width: 24px !important;
+  height: 24px !important;
 }

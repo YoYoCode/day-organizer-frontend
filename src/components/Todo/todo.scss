@@ -7,10 +7,14 @@
    // border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 10px;
     &__todo {
+      display: flex;
+      overflow: hidden;
+      align-items: center;
+      min-height: 6rem;
       list-style: none;
       position: relative;
       width: 100%;
-      padding: 1.5rem 0.75rem;
+      padding: 2.5rem 0.75rem;
       background: white;
       margin-bottom: .75rem;
      // background:rgba(255,255,255,.85);
@@ -31,25 +35,25 @@
       border-radius: 5px;
     }
     &__todo-title {
-      font-weight: 600;
+      font-family: Segoe UI Historic, Segoe UI, Helvetica, Arial, sans-serif;
       color: rgba(0, 0, 0, 0.9);
       margin: 0;
       padding: 0 0 0 0.5rem;
       width: 100%;
-      font-size: 1rem;
+      font-size: 1.25rem;
       &:focus {
         outline-color: transparent;
         font-style: italic;
         caret-color: #4a4a49;
       }
     }
-    &__todo-edit {
-      position: absolute;
-      right: 25px;
-      top: 15px;
-      cursor: pointer;
-      transform: translateX(50px);
-      transition: all 0.3s linear;
+    &:hover {
+      .todos__todos-edit {
+        svg {
+          transition: all .5s ease;
+          transform: translateX(0px);
+        }
+      }
     }
     &__todo-check {
       position: absolute;
