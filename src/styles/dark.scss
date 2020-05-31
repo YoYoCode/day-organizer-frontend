@@ -3,7 +3,16 @@
 .#{$Dark} {
   background: #4a4a49;
   .labels-menu {
-    background-color: #eeebe4
+    background-color:#4a4a49;
+    border: 2px solid $col-bg-light;
+    border-top:0;
+    border-bottom: 0;
+    color: $col-bg-light !important;
+    input{
+      background-color: lighten($color: #4a4a49, $amount: 25);
+      border: 1px solid $col-bg-light;
+      color: $col-bg-light;
+    }
   }
 
   .card-group {
@@ -28,37 +37,72 @@
   .navbar{
     background-color: #282d4650;
     color: white !important;
-    box-shadow: 0px 0px 20px 0px #eeebe4;
+    box-shadow: 0px 0px 20px 0px $col-bg-light;
   }
   .navbar-brand,.nav-link{
     color: #FFFFFF !important;
   }
   .todo-section-header-button {
-    color: #eeebe4 !important;
+    color: $col-bg-light !important;
     background: transparent !important;
     &:hover, &:focus {
-      background: #eeebe4 !important;
+      background: $col-bg-light !important;
       color: #4a4a49 !important;
     }
    }
   .section-btn {
     .section-name {
-      color: #eeebe4 !important;
+      color: $col-bg-light !important;
     }
     .section-toggle {
-      color: #eeebe4 !important;
+      color: $col-bg-light !important;
       background: transparent !important;
-      border-bottom: 2px solid #eeebe4 !important;
+      border-bottom: 2px solid $col-bg-light !important;
       &:hover, &:focus {
-        color: #eeebe4 !important;
+        color: $col-bg-light !important;
         background: transparent !important;
-        border-bottom: 2px solid #eeebe4 !important;
+        border-bottom: 2px solid $col-bg-light !important;
       }
       svg {
         path {
-          fill: #eeebe4 !important;
+          fill: $col-bg-light !important;
         }
       }
+    }
+  }
+  .todos{
+    &__todo{
+       background: transparent !important;
+    box-shadow: 0px 2px 15px -4px $col-bg-light;
+    //border: 1px solid $col-bg-light;
+    }
+    &__todo-title{
+      color:$col-bg-light;
+    }
+    &__todo-timer-logo{
+      border:1px solid $col-bg-light;
+    }
+  }
+  .modal-content{
+    background-color: lighten($color: #4a4a4a, $amount: 0.1);
+    //box-shadow: 0px 2px 15px -4px $col-bg-light;
+    border: 2px solid $col-bg-light;
+    color: $col-bg-light;
+    textarea,input,.react-date-picker__wrapper,.react-time-picker__wrapper,.react-dropdown-select{
+      background-color: transparent !important;
+    }
+    .react-time-picker__inputGroup__input {
+      color: $col-bg-light;
+    }
+    svg.react-date-picker__calendar-button__icon,.react-date-picker__clear-button__icon,.react-time-picker__clear-button__icon,.react-time-picker__clock-button__icon{
+      stroke: $col-bg-light;
+    }
+  }
+  .todos__todos-edit{
+    svg{
+      path{
+        fill: $col-bg-light !important;
+      };
     }
   }
 }

@@ -1,13 +1,13 @@
 @import "./styles/shared.scss";
 
 .#{$Light} {
-  background: #eeebe4;
+  background: $col-bg-light;
   .labels-menu {
     background-color: #4A4A49;
   }
 
   .card-group {
-    background: #eeebe4 url("../assets/form-light-background.svg") top left no-repeat;
+    background: $col-bg-light url("../assets/form-light-background.svg") top left no-repeat;
     h1 {
       background: url("../assets/form-title-background.png") no-repeat;
       color: black;
@@ -26,7 +26,7 @@
     }
   }
   .navbar{
-    background-color: #eeebe4;
+    background-color: $col-bg-light;
     color: #000000 !important;
     box-shadow: 0px 0px 20px 0px #4a4a49;
   }
@@ -38,7 +38,7 @@
     background: transparent !important;
     &:hover, &:focus {
       background: #4a4a4a !important;
-      color: #eeebe4 !important;
+      color: $col-bg-light !important;
     }
   }
   .section-btn {
@@ -64,6 +64,7 @@
   .pomodoro {
     font-family: Helvetica, Arial, sans-serif !important;
     background-color: #4a4a49 !important;
-    color: #eeebe4 !important;
+    color: $col-bg-light !important;
   }
 }
+

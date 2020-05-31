@@ -1,6 +1,8 @@
 $Light: lightWhite;
 
 $Dark: darkBlack;
+$col-light-cream :#EEEBE4;
+$col-bg-light : $col-light-cream;
 
 .container{
   width:90%;
@@ -93,7 +95,7 @@ $Dark: darkBlack;
   margin: 10px 40px;
   .accordion-arrow {
     path {
-      fill: #eeebe4 !important;
+      fill: $col-bg-light !important;
     }
   }
 }
@@ -102,7 +104,7 @@ $Dark: darkBlack;
   .section-toggle {
     background-color: #b23b47 !important;
     &:hover, &:focus {
-      color: #eeebe4 !important;
+      color: $col-bg-light !important;
       background-color: #b23b47 !important;
     }
   }
@@ -280,7 +282,7 @@ $Dark: darkBlack;
     margin-right: .5rem;
     margin-left: 0px;
     // font-weight: bold;
-    color: #eeebe4;
+    color: $col-bg-light;
     display: inline-block;
     vertical-align: middle;
     padding-left: 5px;
@@ -291,7 +293,7 @@ $Dark: darkBlack;
   margin-right: .5rem;
   padding-left: 5px;
   background: #045591 !important;
-  color: #eeebe4;
+  color: $col-bg-light;
   .todo-label-text {
     vertical-align: middle;
     margin-right: .5rem;
@@ -306,7 +308,7 @@ $Dark: darkBlack;
     width: 16px !important;
     height: 16px !important;
     path {
-      fill: #eeebe4 !important;
+      fill: $col-bg-light !important;
     }
   }
 }
@@ -334,6 +336,9 @@ $Dark: darkBlack;
   height: 24px !important;
 }
 
+.todo-main-section{
+  padding:1rem 0 2rem;
+}
 
 @media only screen and (max-width: 768px) {
   .accordion{
@@ -357,6 +362,9 @@ $Dark: darkBlack;
       width: 10px !important;
       height: 10px !important;
     }
+  }
+  .todos{
+    width: 95% !important;
   }
   .todos__todo{
     padding: 2.5rem .5rem .75rem !important;
@@ -410,4 +418,41 @@ $Dark: darkBlack;
 }
 .labels-menu{
   padding:1.5rem;
+}
+.login-card.card{
+  background-color: transparent !important;
+  border: none !important;
+}
+.accordion__wrapper{
+  .card-body::-webkit-scrollbar {
+    width: 0.5em;
+  
+  }
+   
+  .card-body::-webkit-scrollbar-track {
+   // box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+   
+  .card-body::-webkit-scrollbar-thumb {
+    background-color: #045591 ;
+    outline: 1px solid #045591 ;
+  }
+  .card-body::-webkit-scrollbar-thumb{
+    border-radius: 20px;
+  }
+}
+
+.overdue-section-btn{
+  .card-body::-webkit-scrollbar {
+    width: 0.5em;
+  }
+   
+  .card-body::-webkit-scrollbar-track {
+   // box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+   
+  .card-body::-webkit-scrollbar-thumb {
+    background-color: #b23b47  ;
+    outline: 1px solid #b23b47  ;
+  }
 }
