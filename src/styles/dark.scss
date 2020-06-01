@@ -4,7 +4,7 @@
   background: #4a4a49;
   .labels-menu {
     background-color:#4a4a49;
-    border: 2px solid $col-bg-light;
+    border: 1px solid $col-bg-light;
     border-top:0;
     border-bottom: 0;
     color: $col-bg-light !important;
@@ -35,9 +35,12 @@
     }
   }
   .navbar{
-    background-color: #282d4650;
+    background-color: #4a4a49;
     color: white !important;
     box-shadow: 0px 0px 20px 0px $col-bg-light;
+    .navbar-toggler{
+      filter: invert(1);
+    }
   }
   .navbar-brand,.nav-link{
     color: #FFFFFF !important;
@@ -57,11 +60,11 @@
     .section-toggle {
       color: $col-bg-light !important;
       background: transparent !important;
-      border-bottom: 2px solid $col-bg-light !important;
+      border-bottom: 1px solid $col-bg-light !important;
       &:hover, &:focus {
         color: $col-bg-light !important;
         background: transparent !important;
-        border-bottom: 2px solid $col-bg-light !important;
+        border-bottom: 1px solid $col-bg-light !important;
       }
       svg {
         path {
@@ -73,7 +76,7 @@
   .todos{
     &__todo{
        background: transparent !important;
-    box-shadow: 0px 2px 15px -4px $col-bg-light;
+    box-shadow: 0px 1px 15px -4px $col-bg-light;
     //border: 1px solid $col-bg-light;
     }
     &__todo-title{
@@ -85,8 +88,8 @@
   }
   .modal-content{
     background-color: lighten($color: #4a4a4a, $amount: 0.1);
-    //box-shadow: 0px 2px 15px -4px $col-bg-light;
-    border: 2px solid $col-bg-light;
+    //box-shadow: 0px 1px 15px -4px $col-bg-light;
+    border: 1px solid $col-bg-light;
     color: $col-bg-light;
     textarea,input,.react-date-picker__wrapper,.react-time-picker__wrapper,.react-dropdown-select{
       background-color: transparent !important;
@@ -103,6 +106,17 @@
       path{
         fill: $col-bg-light !important;
       };
+    }
+  }
+  .left-nav {
+    .card{
+      
+      button{
+        background-color: #4a4a49 !important;
+        color: $col-bg-light !important;
+         border: 1px solid $col-bg-light;
+         margin-bottom: 0.25rem !important;
+      }
     }
   }
 }
