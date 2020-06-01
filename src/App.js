@@ -1,9 +1,9 @@
 import * as React from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import { Route, Switch} from 'react-router-dom';
 import {Router, withRouter} from 'react-router';
 import {createBrowserHistory} from 'history';
 import './App.scss';
-import {Todoist} from './components/Todoist/todoist';
+import Todoist from './components/Todoist/todoist';
 import TodoistNavbar from './components/Todoist-Navbar/navbar';
 
 const loading = () => {

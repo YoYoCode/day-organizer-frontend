@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import todoistDashboardReducer from '../components/Todoist/todoist-dashboard-slice';
+import todoistDashboardReducer1 from '../components/Todoist/todoist-dashboard-slice';
 
 export default configureStore({
   reducer: {
-    counter: counterReducer,
+    todoistDashboard: todoistDashboardReducer,
+    todoistDashboard1: todoistDashboardReducer1,
   },
 });

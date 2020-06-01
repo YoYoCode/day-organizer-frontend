@@ -1,0 +1,184 @@
+{
+  "overdue": [
+    {
+      "_id": "5ed3c57cbd002437aac450ce",
+      "status": "ACTIVE",
+      "userId": "5ed29d3c1a51d633d6e48208",
+      "name": "Test Task",
+      "label": {
+        "_id": "5ed3c572bd002437aac450cd",
+        "name": "Test Label 1"
+      },
+      "reminder": "2020-05-16T16:19:41.889Z",
+      "createdAt": "2020-05-31T14:55:56.625Z",
+      "updatedAt": "2020-05-31T14:55:56.625Z"
+    },
+    {
+      "_id": "5ed3c684bd002437aac450cf",
+      "status": "ACTIVE",
+      "userId": "5ed29d3c1a51d633d6e48208",
+      "name": "Test Task 2",
+      "label": {
+        "_id": "5ed3c572bd002437aac450cd",
+        "name": "Test Label 1"
+      },
+      "reminder": "2020-06-16T16:19:41.889Z",
+      "createdAt": "2020-05-31T15:00:20.486Z",
+      "updatedAt": "2020-05-31T15:00:20.486Z"
+    },
+    {
+      "_id": "5ed3d3c728fd8e37da918a41",
+      "status": "ACTIVE",
+      "userId": "5ed29d3c1a51d633d6e48208",
+      "name": "Start Dieting",
+      "label": {
+        "_id": "5ed3c572bd002437aac450cd",
+        "name": "Test Label 1"
+      },
+      "reminder": "2020-06-06T16:19:41.889Z",
+      "createdAt": "2020-05-31T15:56:55.515Z",
+      "updatedAt": "2020-05-31T15:56:55.515Z"
+    }
+  ],
+  "today": [
+    {
+      "_id": "5ed3c57cbd002437aac450ce",
+      "status": "ACTIVE",
+      "userId": "5ed29d3c1a51d633d6e48208",
+      "name": "Test Task",
+      "label": {
+        "_id": "5ed3c572bd002437aac450cd",
+        "name": "Test Label 1"
+      },
+      "reminder": "2020-05-16T16:19:41.889Z",
+      "createdAt": "2020-05-31T14:55:56.625Z",
+      "updatedAt": "2020-05-31T14:55:56.625Z"
+    },
+    {
+      "_id": "5ed3c684bd002437aac450cf",
+      "status": "ACTIVE",
+      "userId": "5ed29d3c1a51d633d6e48208",
+      "name": "Test Task 2",
+      "label": {
+        "_id": "5ed3c572bd002437aac450cd",
+        "name": "Test Label 1"
+      },
+      "reminder": "2020-06-16T16:19:41.889Z",
+      "createdAt": "2020-05-31T15:00:20.486Z",
+      "updatedAt": "2020-05-31T15:00:20.486Z"
+    },
+    {
+      "_id": "5ed3d3c728fd8e37da918a41",
+      "status": "ACTIVE",
+      "userId": "5ed29d3c1a51d633d6e48208",
+      "name": "Start Dieting",
+      "label": {
+        "_id": "5ed3c572bd002437aac450cd",
+        "name": "Test Label 1"
+      },
+      "reminder": "2020-06-06T16:19:41.889Z",
+      "createdAt": "2020-05-31T15:56:55.515Z",
+      "updatedAt": "2020-05-31T15:56:55.515Z"
+    }
+  ],
+  "tomorrow": [
+    {
+      "_id": "5ed3c57cbd002437aac450ce",
+      "status": "ACTIVE",
+      "userId": "5ed29d3c1a51d633d6e48208",
+      "name": "Test Task",
+      "label": {
+        "_id": "5ed3c572bd002437aac450cd",
+        "name": "Test Label 1"
+      },
+      "reminder": "2020-05-16T16:19:41.889Z",
+      "createdAt": "2020-05-31T14:55:56.625Z",
+      "updatedAt": "2020-05-31T14:55:56.625Z"
+    },
+    {
+      "_id": "5ed3c684bd002437aac450cf",
+      "status": "ACTIVE",
+      "userId": "5ed29d3c1a51d633d6e48208",
+      "name": "Test Task 2",
+      "label": {
+        "_id": "5ed3c572bd002437aac450cd",
+        "name": "Test Label 1"
+      },
+      "reminder": "2020-06-16T16:19:41.889Z",
+      "createdAt": "2020-05-31T15:00:20.486Z",
+      "updatedAt": "2020-05-31T15:00:20.486Z"
+    },
+    {
+      "_id": "5ed3d3c728fd8e37da918a41",
+      "status": "ACTIVE",
+      "userId": "5ed29d3c1a51d633d6e48208",
+      "name": "Start Dieting",
+      "label": {
+        "_id": "5ed3c572bd002437aac450cd",
+        "name": "Test Label 1"
+      },
+      "reminder": "2020-06-06T16:19:41.889Z",
+      "createdAt": "2020-05-31T15:56:55.515Z",
+      "updatedAt": "2020-05-31T15:56:55.515Z"
+    }
+  ],
+  "overmorrow": [
+    {
+      "_id": "5ed3c57cbd002437aac450ce",
+      "status": "ACTIVE",
+      "userId": "5ed29d3c1a51d633d6e48208",
+      "name": "Test Task",
+      "label": {
+        "_id": "5ed3c572bd002437aac450cd",
+        "name": "Test Label 1"
+      },
+      "reminder": "2020-05-16T16:19:41.889Z",
+      "createdAt": "2020-05-31T14:55:56.625Z",
+      "updatedAt": "2020-05-31T14:55:56.625Z"
+    },
+    {
+      "_id": "5ed3c684bd002437aac450cf",
+      "status": "ACTIVE",
+      "userId": "5ed29d3c1a51d633d6e48208",
+      "name": "Test Task 2",
+      "label": {
+        "_id": "5ed3c572bd002437aac450cd",
+        "name": "Test Label 1"
+      },
+      "reminder": "2020-06-16T16:19:41.889Z",
+      "createdAt": "2020-05-31T15:00:20.486Z",
+      "updatedAt": "2020-05-31T15:00:20.486Z"
+    },
+    {
+      "_id": "5ed3d3c728fd8e37da918a41",
+      "status": "ACTIVE",
+      "userId": "5ed29d3c1a51d633d6e48208",
+      "name": "Start Dieting",
+      "label": {
+        "_id": "5ed3c572bd002437aac450cd",
+        "name": "Test Label 1"
+      },
+      "reminder": "2020-06-06T16:19:41.889Z",
+      "createdAt": "2020-05-31T15:56:55.515Z",
+      "updatedAt": "2020-05-31T15:56:55.515Z"
+    }
+  ],
+  "labels": [
+    {
+      "_id": "5ed3c572bd002437aac450cd",
+      "userId": "5ed29d3c1a51d633d6e48208",
+      "name": "Test Label 1",
+      "colorCode": "#0777",
+      "createdAt": "2020-05-31T14:55:46.056Z",
+      "updatedAt": "2020-05-31T14:55:46.056Z"
+    },
+    {
+      "_id": "5ed3c6a7bd002437aac450d0",
+      "userId": "5ed29d3c1a51d633d6e48208",
+      "name": "Test Label 2",
+      "colorCode": "#0888",
+      "createdAt": "2020-05-31T15:00:55.250Z",
+      "updatedAt": "2020-05-31T15:00:55.250Z"
+    }
+  ]
+}
