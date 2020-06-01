@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
   Collapse,
   Navbar,
@@ -10,28 +10,39 @@ import {
 } from 'reactstrap';
 import Toggle from '../ToggleSwitch/toggle';
 
-export const TodoistNavbar = (props) => {
-      const [isOpen, setIsOpen] = useState(false);
-      const toggle = () => setIsOpen(!isOpen);
+function TodoistNavbar (props) {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggle = () => setIsOpen(!isOpen);
 
-      return(
-        <Navbar light expand="md" fixed="top">
-          <div className="container">
-            <NavbarBrand href="/">TodoList</NavbarBrand>
+  const signOut = useCallback((e) => {
+    e.preventDefault();
+    localStorage.removeItem('token');
+    props.history.push('/login'); // eslint-disable-line
+  }, [props]);
+
+  const navigateHome = useCallback((e) => {
+    e.preventDefault();
+    props.history.push('/'); // eslint-disable-line
+  }, [props]);
+
+  return(
+    <Navbar light expand="md" fixed="top">
+      <div className="container">
+        <NavbarBrand onClick={navigateHome}>Day Organizer</NavbarBrand>
         <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar >
+        <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
           <NavItem>
               <Toggle/>
           </NavItem>
             <NavItem>
-              <NavLink href="">Logout</NavLink>
+              <NavLink href="" onClick={signOut}>Logout</NavLink>
             </NavItem>
           </Nav>
         </Collapse>
-          </div>
-        </Navbar>
-      );
-    }
+      </div>
+    </Navbar>
+  );
+}
 
-    export default TodoistNavbar;
+export default TodoistNavbar;

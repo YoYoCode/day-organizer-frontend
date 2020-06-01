@@ -54,8 +54,13 @@ $col-bg-light : $col-light-cream;
     }
     &:focus {
       outline: 0 !important;
+      box-shadow: none !important;
     }
   }
+}
+
+.navbar-brand {
+  cursor: pointer;
 }
 
 // .col-name {

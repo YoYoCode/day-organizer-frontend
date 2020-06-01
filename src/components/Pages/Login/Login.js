@@ -100,13 +100,11 @@ export default class Login extends Component {
                     </Row>
                     <Row style={{paddingLeft: '15px'}}>
                       <Button
-                        color='primary'
                         className='px-4 theme-btn'
                         style={{marginRight: '20px'}}>
                         Login
                       </Button>
                       <Button
-                        color='primary'
                         className='px-4 text-right theme-btn'
                         onClick={this.signup}>
                         Create Account
