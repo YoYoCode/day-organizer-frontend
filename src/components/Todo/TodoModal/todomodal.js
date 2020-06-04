@@ -1,10 +1,16 @@
 
-import React, { useState } from 'react';
+import React, { useState , useCallback } from 'react';
+import {useDispatch} from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { AvForm, AvField} from 'availity-reactstrap-validation';
 import TimePicker from 'react-time-picker';
 import DatePicker from 'react-date-picker';
 import Select from 'react-dropdown-select';
+import {Dunzo} from '../../../services/api';
+import _ from 'lodash';
+import store from '../../../app/store';
+import { dashboardTodoistUpdate } from '../../Todoist/todoist-dashboard-slice';
+
 
 export const PriorityFlag= props=>(
   <svg height="24" width="24" version="1.1" className={props.className} {...props}>
@@ -20,35 +26,106 @@ export const PriorityFlag= props=>(
 );
 
 const TodoModal = (props) => {
+  const dispatch = useDispatch();
   const {
     buttonLabel,
     className
   } = props;
-  const options = [{
-    "id": "7fd93453-f403-4ddd-9239-1e689db4a9df",
-    "label": "Aurelia ",
-    },{
-        "id": "7fd93453-f403-4ddd-9239-1e6ss89db4a9df",
-        "label": " Kling",
-    }];
-
   const [modal, setModal] = useState(false);
-  const [value, onChange] = useState('23:59');
+  const [date, setDate] = useState(new Date());
+  const [time, setTime] = useState('23:59');
+  const [stateStore, setStateStore] = useState(store.getState());
+  const getLabelsOptionsDisplay = useCallback(()=>{
+    const labels =  _.map(stateStore.todoistDashboard.labels, (labelsOption)=>{
+      return {
+        "label": labelsOption.name,
+        "value": labelsOption.name
+      }
+    })
+    return labels;
+  });
+  const [labelsOptionsList, setLabelsOptionsList] = useState(getLabelsOptionsDisplay());
+    store.subscribe(()=>{
+      setStateStore(_.cloneDeep(store.getState()));
+      setLabelsOptionsList(getLabelsOptionsDisplay());
+    })
+  
+  const updateDateAndTime = useCallback(()=>{
+    const getDate = date;
+    const getTime = time;
+    if(getDate !== null && getTime !== null){
+      const hours = getTime.split(':')[0];
+      const minutes = getTime.split(':')[1];
+      getDate.setHours(hours);
+      getDate.setMinutes(minutes);
+      getDate.setSeconds('00');
+      return getDate; 
+    } else{
+      const todayDate = new Date();
+      const todayTime = '23:59';
+      const hours = todayTime.split(':')[0];
+      const minutes = todayTime.split(':')[1];
+      todayDate.setHours(hours);
+      todayDate.setMinutes(minutes);
+      todayDate.setSeconds('00');
+        return todayDate;
+    }
+  });
+  const [dateAndTime, setDateAndTime] = useState(updateDateAndTime());
+  const [todoTitle, setTodoTitle] = useState('');
+  const [notifyOnSubmitError, setNotifyOnSubmitError] = useState(false);
+  const [selectedLabelID, setselectedLabelID] = useState('');
+  const onDateChange = useCallback(async (dateUpdated)=>{
+    setDate(dateUpdated)
+    setDateAndTime(updateDateAndTime().toUTCString());  
+  });
+  const onTimeChange = useCallback(async (timeUpdated)=>{
+    setTime(timeUpdated);
+    setDateAndTime(updateDateAndTime().toUTCString());  
+  });
 
+  const applyChanges = useCallback(async ()=>{
+    if(todoTitle.trim() !== ''){
+      const res = await Dunzo.createTodo({name: todoTitle, label: selectedLabelID, reminder: dateAndTime });
+      props.toggle();
+    } else{
+      setNotifyOnSubmitError(!notifyOnSubmitError)
+    }
+  });
+  const selectedLabelOptions = useCallback(async (selectedLabel)=>{
+    if(!_.isEmpty(selectedLabel)){
+        const selectLabel = _.filter(stateStore.todoistDashboard.labels, (labelsOption)=>{
+        return selectedLabel[0].value == labelsOption.name;
+      })
+      if(!_.isEmpty(selectLabel)){
+        setselectedLabelID(selectLabel[0]._id);
+      } else{
+        const res = await Dunzo.createLabel({name: selectedLabel[0].value});
+        setselectedLabelID(res.data._id);
+          // let tempStateStore = _.cloneDeep(stateStore); 
+          // tempStateStore.todoistDashboard.labels = [...tempStateStore.todoistDashboard.labels, res.data];
+          // setStateStore(tempStateStore);
+          // dispatch(dashboardTodoistUpdate(stateStore.todoistDashboard));   
+      }
+    }
+    
+  });
+  
   return (
     <div>
       <Modal isOpen={props.modal} toggle={props.toggle} className={className}>
         <ModalHeader toggle={props.toggle}>Add Todo</ModalHeader>
         <ModalBody>
          <div className="text-center py-6">
-          <span className="todo-modal-label">Todo Title</span>
-          <textarea></textarea>
+          <span className="todo-modal-label">Todo Title {notifyOnSubmitError === false ? '' : <span style={{color:'red', fontSize:'20px'}}>*</span>}</span>
+          <textarea value={todoTitle} onChange={e => setTodoTitle(e.target.value)}></textarea>
+          {notifyOnSubmitError === false ? '' : <span  style={{textAlign:'left', display:'block',fontSize:'12px',fontWeight:'bold',color:'red'}}>Enter Todo Title</span>}
         </div> 
         
         <div className="text-center py-6">
             <span className="todo-modal-label">Schedule</span>
-            <DatePicker/>
-            <TimePicker onChange={onChange} value={value}/>
+            <DatePicker onChange={onDateChange} value={date}/>
+            <TimePicker onChange={onTimeChange} value={time}/>
         </div>
         <div className="text-center py-6">
             <span className="todo-modal-label">Priority</span>
@@ -60,13 +137,24 @@ const TodoModal = (props) => {
         </div>
         <div>
             <Select
-                multi
-                options={options}
+                clearable
+                placeholder="Add/Select Label"
+                options={labelsOptionsList}
+                className="modal-label-selector"
+                createNewLabel="+ Add Label"
+                create
+                separator
+                onChange={selectedLabelOptions}
+                dropdownHandle
+                labelField="label"
+                valueField="value"
+                backspaceDelete
+                
             />
         </div>
         </ModalBody>
         <ModalFooter>
-          <Button className="red" onClick={props.toggle}>Apply changes</Button>{' '}
+          <Button className="red" onClick={applyChanges}>Apply changes</Button>{' '}
           <Button color="secondary" onClick={props.toggle}>Cancel</Button>
         </ModalFooter>
       </Modal>

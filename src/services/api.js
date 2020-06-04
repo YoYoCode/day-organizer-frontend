@@ -25,6 +25,22 @@ const Dunzo = {
       data: subscription,
     });
   },
+
+  createLabel: async (labelInfo) => {
+    return courier({
+      method: 'POST',
+      url: 'https://todo-hackathon.herokuapp.com/api/v1/labels',
+      data: labelInfo,
+    });
+  },
+
+  createTodo: async (todoInfo) => {
+    return courier({
+      method: 'POST',
+      url: 'https://todo-hackathon.herokuapp.com/api/v1/tasks',
+      data: todoInfo,
+    });
+  },
 };
 
 export {Dunzo};
