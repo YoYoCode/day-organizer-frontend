@@ -7,7 +7,7 @@ export default class TodoCard extends Component {
     super(props);
 
     this.state = {
-      
+      todoSectionData: props.data,
     };
   }
 
@@ -22,12 +22,9 @@ export default class TodoCard extends Component {
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="0">
               <Card.Body>
-                <Todo/>
-                <Todo/>
-                <Todo/>
-                <Todo/>
-                <Todo/>
-                <Todo/>
+                {this.state.todoSectionData.map((b) => {
+                  return (<Todo data={b} key={b.name} />);
+                })}
               </Card.Body>
             </Accordion.Collapse>
           </Card>

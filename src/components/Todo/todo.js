@@ -8,10 +8,13 @@ import {PriorityFlag} from '../Todo/TodoModal/todomodal';
 export class Todo extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      todoData: props.data
+    }
   }
 
   render() {
-     
+    const {todoData} = this.state;
     return (
       <div className="todo-card">
         <ul className="todos">
@@ -20,7 +23,7 @@ export class Todo extends React.Component {
             <div className="todos__todo-body">
               <span className="todos__todo-check" title="Complete this Todo"> </span>
               <h3 className="todos__todo-title" contentEditable="true" suppressContentEditableWarning={true}>
-              start dieting
+              {todoData.name}
               </h3>
             </div>
 
@@ -29,12 +32,12 @@ export class Todo extends React.Component {
               <div className="todos__todo_details_section">
                 <div className="todos__todo-timer-logo svg-fill">
                 <DueClock></DueClock>
-                <span className="todos__todo-duedate-text"> 31st May 2020 10:59 PM</span>
+                <span className="todos__todo-duedate-text">{todoData.reminder}</span>
                 </div>
               </div>
               <div className="todo-label svg-fill">
                 <LabelTag></LabelTag>
-                <span className="todo-label-text">Inbox</span>
+                <span className="todo-label-text">{todoData.label.name}</span>
               </div>
               <div className="todos__todos-edit todo-edit-button">
                 <span className="todos__todos-edit">

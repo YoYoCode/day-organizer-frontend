@@ -14,15 +14,14 @@ function Todoist(props) {
   const defaultState = useSelector(defaultDashboardTodoistState);
   const dispatch = useDispatch();
 
-  var a = store.getState();
-  console.log(a);
-
-  useEffect(() => {
+  const initialDataFetch = () => {
     Promise.resolve(setTimeout(() => {
-    }, 5000)).then(() => {
+    }, 0)).then(() => {
       dispatch(dashboardTodoistUpdate(TestData));
     });
-  });
+  };
+
+  useEffect(initialDataFetch);
 
   return (
     <div>

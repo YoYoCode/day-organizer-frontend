@@ -1,17 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Button } from 'reactstrap';
 import TodoModal from '../Todo/TodoModal/todomodal';
 import TodoCard from '../Todo/TodoCard/TodoCard';
 import Pomodoro from '../Pomodoro/pomodoro';
 import { Collapse, CardBody, Card } from 'reactstrap';
 import {PriorityFlag} from '../Todo/TodoModal/todomodal';
+import store from '../../app/store';
 
 const MainArea = (props) => {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
   const [isOpen, setIsOpen] = useState(false);
+  const [dashboardSectionData, setDashboardSectionData] = useState(undefined);
   const toggle1 = () => setIsOpen(!isOpen);
   const toggle2 = () => setIsOpen(!isOpen);
+
+  const storeSubscription = store.subscribe(
+    () => {
+      setDashboardSectionData(store.getState());
+    }
+  );
+
+  useEffect(() => {
+    storeSubscription();
+  }, []);
+
   return (
     <Container fluid>
       <Row className='main-layout-row'>
@@ -55,18 +68,19 @@ const MainArea = (props) => {
             <Button onClick={toggle} className="todo-section-header-button btn">Add Task</Button>
           </div>
           <TodoModal modal={modal} toggle={toggle}/>
-          <div className="overdue-section-btn">
-            <TodoCard sectionName='Overdue todos' defaultActiveKey='1'></TodoCard>
+          { (dashboardSectionData !== undefined) ? <> <div className="overdue-section-btn">
+            <TodoCard sectionName='Overdue todos' data={dashboardSectionData.todoistDashboard.overdue} defaultActiveKey='1'></TodoCard>
           </div>
           <div className="section-btn">
-            <TodoCard sectionName='Today' defaultActiveKey='0'></TodoCard>
+            <TodoCard sectionName='Today' data={dashboardSectionData.todoistDashboard.today} defaultActiveKey='0'></TodoCard>
           </div>
           <div className="section-btn">
-            <TodoCard sectionName='Tomorrow' defaultActiveKey='0'></TodoCard>
+            <TodoCard sectionName='Tomorrow' data={dashboardSectionData.todoistDashboard.tomorrow} defaultActiveKey='0'></TodoCard>
           </div>
           <div className="section-btn">
-            <TodoCard sectionName='Overmorrow' defaultActiveKey='0'></TodoCard>
-          </div>
+            <TodoCard sectionName='Overmorrow' data={dashboardSectionData.todoistDashboard.overmorrow} defaultActiveKey='0'></TodoCard>
+          </div> </> : <div> Loading.......</div>}
+          
         </Col>
         <Col className="labels-menu pomodoro" sm="2" md="3">
           <Pomodoro></Pomodoro>
