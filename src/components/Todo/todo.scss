@@ -29,7 +29,7 @@
       justify-content: space-between;
       position: relative;
      // cursor: pointer;
-      width: 95%;
+      width: 100%;
       margin: 0 0 0 auto;
       padding: 0.25rem;
       border-radius: 5px;
@@ -117,3 +117,30 @@
   // ::-webkit-calendar-picker-indicator {
   //   background: transparent;
   // }
+
+
+ 
+
+ 
+  .cntr {
+    margin: auto .5rem;
+  }
+  #rdo-1{
+    width:20px;
+    height:20px;
+    transition: all .4s ease;
+    &:hover{
+      transform:scale(1.2);
+    }
+  }
+
+  .todo-card{
+    transition: opacity .8s ease;
+  }
+  .todo-card.completed{
+    display: none;
+  }
+  .todo-card.notCompleted{
+    display: block;
+  }
+  

@@ -1,7 +1,7 @@
 import {Accordion, Card, Button} from 'react-bootstrap';
 import React, {Component} from 'react';
 import Todo from '../todo';
-
+import _ from 'lodash'
 export default class TodoCard extends Component {
   constructor(props) {
     super(props);
@@ -28,9 +28,9 @@ export default class TodoCard extends Component {
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="0">
               <Card.Body>
-                {this.state.todoSectionData.map((todoData) => {
+                {!_.isEmpty(this.state.todoSectionData) ? this.state.todoSectionData.map((todoData) => {
                   return (<Todo data={todoData} sectionName={this.props.sectionName} key={todoData.name} />);
-                })}
+                }) : null}
               </Card.Body>
             </Accordion.Collapse>
           </Card>

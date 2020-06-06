@@ -9,16 +9,20 @@ import {
   NavLink
 } from 'reactstrap';
 import Toggle from '../ToggleSwitch/toggle';
+import {loggedIn} from '../../App';
 
 function TodoistNavbar (props) {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
+  const [isloggedIn, setIsLoggedIn] = useState(loggedIn());
 
   const signOut = useCallback((e) => {
     e.preventDefault();
     localStorage.removeItem('token');
     props.history.push('/login'); // eslint-disable-line
   }, [props]);
+
+
 
   const navigateHome = useCallback((e) => {
     e.preventDefault();
@@ -35,9 +39,10 @@ function TodoistNavbar (props) {
           <NavItem>
               <Toggle/>
           </NavItem>
-            <NavItem>
+            {isloggedIn ? <NavItem>
               <NavLink href="" onClick={signOut}>Logout</NavLink>
-            </NavItem>
+            </NavItem> : <></>}
+            
           </Nav>
         </Collapse>
       </div>

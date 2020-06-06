@@ -5,18 +5,26 @@ import {ReactComponent as LabelTag} from '../../assets/tag.svg';
 import {ReactComponent as DueClock} from '../../assets/timerClock.svg';
 import {PriorityFlag} from '../Todo/TodoModal/todomodal';
 import TodoModal from './TodoModal/todomodal';
+import store from '../../app/store'
+import { Dunzo } from '../../services/api';
+import {dashboardTodoistUpdate} from '../Todoist/todoist-dashboard-slice';
+import TestData from '../../Test-data/test-data.json';
 
 export class Todo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       todoData: props.data,
+      status:false,
       editTodoCardId: null,
       modal: false
     }
+    this.completeTodo = this.completeTodo.bind(this);
     this.toggle = this.toggle.bind(this);
     this.editTodo = this.editTodo.bind(this);
   }
+     
+
 
   toggle () {
     this.setState({
@@ -30,11 +38,27 @@ export class Todo extends React.Component {
     });
     this.toggle();
   }
+      
+
+  async completeTodo(e){
+    const state = _.cloneDeep(store.getState());
+    this.setState({status:true});
+    
+    const completeTodoCardData = _.filter(_.cloneDeep(state.todoistDashboard[e.currentTarget.dataset.section.toLowerCase()]), (todoData) => {
+      return todoData._id === e.currentTarget.dataset.id;
+    });
+    const res = await Dunzo.editTodo({name: completeTodoCardData[0].name, label: _.isEmpty(completeTodoCardData[0].label._id) ? null : completeTodoCardData[0].label._id, reminder: completeTodoCardData[0].reminder, status: 'COMPLETED' }, completeTodoCardData[0]._id);
+
+
+    if(res.status=== 200){
+      store.dispatch(dashboardTodoistUpdate(res.data));
+    }    
+  }
 
   render() {
     const {todoData, editTodoCardId, modal} = this.state;
     return (
-      <div className="todo-card">
+      <div className={`todo-card ${this.state.status ? 'completed' : 'notCompleted'}`} data-id={todoData._id}>
         {
           editTodoCardId !== null ? <TodoModal modal={modal} toggle={this.toggle} state={
             { todoId: editTodoCardId, sectionName: this.props.sectionName }
@@ -43,7 +67,7 @@ export class Todo extends React.Component {
         <ul className="todos">
           <li className="todos__todo">
             <div className="todos__todo-body">
-              <span className="todos__todo-check" title="Complete this Todo"> </span>
+              <input data-id={todoData._id} data-section={this.props.sectionName} onChange={this.completeTodo} className="cntr" title="Complete Todo" type="radio" id="rdo-1" name="radio-grp"/>
               <h3 className="todos__todo-title">
               {todoData.name}
               </h3>
