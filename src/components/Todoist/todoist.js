@@ -22,7 +22,9 @@ function Todoist(props) {
     }
   };
 
-  useEffect(initialDataFetch, []);
+  useEffect(() => {
+    initialDataFetch();
+  }, []);
 
   return (
     <div>
