@@ -41,6 +41,28 @@ const Dunzo = {
       data: todoInfo,
     });
   },
+
+  getTasksByLabel: async (labelInfo) => {
+    return courier({
+      method: 'GET',
+      url: `https://todo-hackathon.herokuapp.com/api/v1/tasks`,
+      params: labelInfo
+    });
+  },
+  getTasksByPriority: async (priorityInfo) => {
+    return courier({
+      method: 'GET',
+      url: `https://todo-hackathon.herokuapp.com/api/v1/tasks`,
+      params: priorityInfo
+    });
+  },
+  getTasksByStatus: async (statusInfo) => {
+    return courier({
+      method: 'GET',
+      url: `https://todo-hackathon.herokuapp.com/api/v1/tasks`,
+      params: statusInfo
+    });
+  },
 };
 
 export {Dunzo};

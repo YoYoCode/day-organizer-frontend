@@ -87,6 +87,15 @@
     }
   }
   .modal-content{
+    textarea{
+      color:$col-bg-light;
+    }
+    textarea + span{
+      color:White !important;
+    }
+    button.close{
+      color:$col-bg-light;
+    }
     background-color: lighten($color: #4a4a4a, $amount: 0.1);
     //box-shadow: 0px 1px 15px -4px $col-bg-light;
     border: 1px solid $col-bg-light;
@@ -94,8 +103,16 @@
     textarea,input,.react-date-picker__wrapper,.react-time-picker__wrapper,.react-dropdown-select{
       background-color: transparent !important;
     }
-    .react-time-picker__inputGroup__input {
+    .react-time-picker__inputGroup__input,.react-date-picker__inputGroup__input {
       color: $col-bg-light;
+    }
+    .react-dropdown-select-input {
+      &::placeholder{
+        color:$col-bg-light;
+      }
+    }
+    .react-dropdown-select-item{
+      background-color: #4a4a49 !important;
     }
     svg.react-date-picker__calendar-button__icon,.react-date-picker__clear-button__icon,.react-time-picker__clear-button__icon,.react-time-picker__clock-button__icon{
       stroke: $col-bg-light;

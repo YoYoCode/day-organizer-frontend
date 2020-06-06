@@ -431,7 +431,7 @@ $col-bg-light : $col-light-cream;
     background-color: #4A4A49;
     max-height: 200px !important;
     overflow: auto;
-    width: 80% ;
+    //width: 80% ;
     margin: 0 auto;
     button{
       text-align: center;
@@ -445,6 +445,23 @@ $col-bg-light : $col-light-cream;
   }
 }
 
+.nav-add-label__wrapper{
+  input{
+    border: none !important;
+    background-color: transparent !important;
+    width: 90%;
+    margin: 0 auto;
+    display: block;
+    overflow: hidden;
+  }
+  margin: 1rem 0;
+  div:first-child{
+   // overflow-x: hidden;
+  }
+  .react-dropdown-select-dropdown-handle,.react-dropdown-select-clear{
+    display: none !important;
+  }
+}
 
 
 @media only screen and (max-width: 768px) {
@@ -561,7 +578,10 @@ $col-bg-light : $col-light-cream;
     button{
       margin: .5rem 0 0 !important;
       &:first-child{
-        margin: 1rem 0 0 !important;
+       // margin: 1rem 0 0 !important;
       }
     }
+  }
+  body, button,a, input,div, label{
+    cursor: url("https://i.ibb.co/vvkJNd5/cursor-1.png"),auto !important;
   }

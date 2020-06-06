@@ -117,9 +117,9 @@ const TodoModal = (props) => {
         <ModalHeader toggle={props.toggle}>Add Todo</ModalHeader>
         <ModalBody>
          <div className="text-center py-6">
-          <span className="todo-modal-label">Todo Title {notifyOnSubmitError === false ? '' : <span style={{color:'red', fontSize:'20px'}}>*</span>}</span>
+          <span className="todo-modal-label">Todo Title {notifyOnSubmitError === false || todoTitle.trim() !== ''  ? '' : <span style={{color:'red', fontSize:'20px'}}>*</span>}</span>
           <textarea value={todoTitle} onChange={e => setTodoTitle(e.target.value)}></textarea>
-          {notifyOnSubmitError === false ? '' : <span  style={{textAlign:'left', display:'block',fontSize:'12px',fontWeight:'bold',color:'red'}}>Enter Todo Title</span>}
+          {notifyOnSubmitError === false || todoTitle.trim() !== ''  ? '' : <span  style={{textAlign:'left', display:'block',fontSize:'12px',fontWeight:'bold',color:'red'}}>Enter Todo Title</span>}
         </div> 
         
         <div className="text-center py-6">
@@ -137,6 +137,7 @@ const TodoModal = (props) => {
         </div>
         <div>
             <Select
+            noDataRenderer={()=>{ return <><p style={{borderTop:'1px solid #4a4a49', padding:'.5rem 0',marginBottom:'0'}} className="text-center">No Label</p></> }}
                 clearable
                 placeholder="Add/Select Label"
                 options={labelsOptionsList}
