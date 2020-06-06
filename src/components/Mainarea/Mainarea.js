@@ -7,7 +7,7 @@ import store from '../../app/store';
 import Select from 'react-dropdown-select';
 import Inbox from './Inbox';
 import Custom from './Custom';
-import { todoistDashboardSlice } from '../Todoist/todoist-dashboard-slice';
+import {dashboardTodoistUpdate} from '../Todoist/todoist-dashboard-slice';
 import _ from 'lodash';
 import { Dunzo } from '../../services/api';
 
@@ -20,7 +20,11 @@ const MainArea = (props) => {
   const toggle1 = () => setIsOpen1(!isOpen1);
   const toggle2 = () => setIsOpen2(!isOpen2);
 
-  const storeSubscription = store.subscribe(
+  useEffect(() => {
+    setDashboardSectionData(store.getState());
+  }, []);
+
+  let storeSubscription = store.subscribe(
     () => {
       setDashboardSectionData(store.getState());
     }
@@ -29,68 +33,49 @@ const MainArea = (props) => {
   useEffect(() => {
     storeSubscription();
   }, []);
-  console.log(dashboardSectionData);
+
   const [showInbox,setShowInbox] = useState(true);
   const [showCustom,setShowCustom] = useState(false);
   const [customTodoData,setCustomTodoData] = useState(undefined);
+
+
   const showCustomTodo = useCallback( async (customType,e)=>{
     setShowInbox(false);
     setShowCustom(true);
    
-    if(customType === 'Label'){
+    if(customType === 'Label') {
       const currentLabelId = e.currentTarget.id;
       const res = await Dunzo.getTasksByLabel({"label": currentLabelId});
-      console.log(res);
-      const selectLabel = _.filter(dashboardSectionData.todoistDashboard.labels, (labelsOption)=>{
-      console.log(currentLabelId);
-        return currentLabelId == labelsOption._id;
-      })
-      console.log(selectLabel);
       if(res.status === 200){
-        //setCustomTodoData(res.data);
-        setCustomTodoData({
-          "sectionName": selectLabel[0].name ,
-          "data": dashboardSectionData.todoistDashboard.today 
-        });
+        setCustomTodoData(res.data);
       } 
 
     } else if(customType === 'Priority'){
       const currentPriorityType = e.currentTarget.id;
       const res = await Dunzo.getTasksByPriority({"priority": currentPriorityType});
-      console.log(res);
       if(res.status === 200){
-        //setCustomTodoData(res.data);
-        setCustomTodoData({
-          "sectionName": `Priority ${_.capitalize(currentPriorityType)}` ,
-          "data": dashboardSectionData.todoistDashboard.today 
-        });
+        setCustomTodoData(res.data);
       }
     } else if(customType === 'Completed'){
       const currentStatusType = e.currentTarget.id;
       const res = await Dunzo.getTasksByStatus({"status": currentStatusType});
-      console.log(res);
       if(res.status === 200){
-        //setCustomTodoData(res.data);
-        setCustomTodoData({
-          "sectionName": `Completed` ,
-          "data": dashboardSectionData.todoistDashboard.today 
-        });
+        setCustomTodoData(res.data);
       }
     }
   });
+
   const onShowInbox = useCallback(()=>{
     setShowCustom(false);
     setShowInbox(true);
   })
 
-  const createLabel = useCallback(async (newlabel)=>{
-    if(!_.isEmpty(newlabel)){
+  const createLabel = useCallback(async (newlabel) => {
+    if(!_.isEmpty(newlabel)) {
       const res = await Dunzo.createLabel({name: newlabel[0].value});
-      newlabel ='';
-        // let tempStateStore = _.cloneDeep(stateStore); 
-        // tempStateStore.todoistDashboard.labels = [...tempStateStore.todoistDashboard.labels, res.data];
-        // setStateStore(tempStateStore);
-        // dispatch(dashboardTodoistUpdate(stateStore.todoistDashboard));   
+      if (res.status === 200) {
+        store.dispatch(dashboardTodoistUpdate(res.data));
+      }
     }
     
   });

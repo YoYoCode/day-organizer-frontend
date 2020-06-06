@@ -8,20 +8,21 @@ import {
 import TestData from '../../Test-data/test-data.json';
 import { useSelector, useDispatch } from 'react-redux';
 import store from '../../app/store';
-
+import { Dunzo } from '../../services/api';
 
 function Todoist(props) {
   const defaultState = useSelector(defaultDashboardTodoistState);
   const dispatch = useDispatch();
 
-  const initialDataFetch = () => {
-    Promise.resolve(setTimeout(() => {
-    }, 0)).then(() => {
-      dispatch(dashboardTodoistUpdate(TestData));
-    });
+  const initialDataFetch = async () => {
+    const res = await Dunzo.getAllTasksStatusActive();
+
+    if (res.status === 200) {
+      dispatch(dashboardTodoistUpdate(res.data));
+    }
   };
 
-  useEffect(initialDataFetch);
+  useEffect(initialDataFetch, []);
 
   return (
     <div>

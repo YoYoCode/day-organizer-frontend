@@ -1,7 +1,7 @@
-import React, {useState, useCallback} from 'react';
+
+import React, { useState , useCallback, useEffect } from 'react';
 import {useDispatch} from 'react-redux';
 import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
-import {AvForm, AvField} from 'availity-reactstrap-validation';
 import TimePicker from 'react-time-picker';
 import DatePicker from 'react-date-picker';
 import Select from 'react-dropdown-select';
@@ -41,29 +41,78 @@ export const PriorityFlag = (props) => (
 
 const TodoModal = (props) => {
   const dispatch = useDispatch();
-  const {buttonLabel, className} = props;
+  const {
+    buttonLabel,
+    className,
+    state
+  } = props;
   const [modal, setModal] = useState(false);
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState('23:59');
   const [stateStore, setStateStore] = useState(store.getState());
-  const getLabelsOptionsDisplay = useCallback(() => {
-    const labels = _.map(stateStore.todoistDashboard.labels, (labelsOption) => {
-      return {
-        label: labelsOption.name,
-        value: labelsOption.name,
-      };
-    });
-    return labels;
-  });
-  const [labelsOptionsList, setLabelsOptionsList] = useState(
-    getLabelsOptionsDisplay()
-  );
-  store.subscribe(() => {
+  const [editTodoData, setEditTodoData] = useState(undefined);
+  const [propsEditData, setPropsEditData] = useState(state);
+  const [labelValues, setLabelValues] = useState([]);
+  const [prioritySelected, setPrioritySelected] = useState('LOW');
+
+  useEffect(() => {
     setStateStore(_.cloneDeep(store.getState()));
     setLabelsOptionsList(getLabelsOptionsDisplay());
+  }, []);
+
+  useEffect(() => {
+    const subscription = store.subscribe(() => {
+      setStateStore(_.cloneDeep(store.getState()));
+      setLabelsOptionsList(getLabelsOptionsDisplay());
+    });
+
+    return () => {
+      subscription();
+    }
   });
 
-  const updateDateAndTime = useCallback(() => {
+  useEffect(() => {
+    if (_.has(propsEditData, 'todoId') && _.get(propsEditData, 'todoId') !== null) {
+      const editTodoCardData = _.filter(_.cloneDeep(stateStore.todoistDashboard[propsEditData.sectionName.toLowerCase()]), (todoData) => {
+        return todoData._id === state.todoId;
+      });
+  
+      setEditTodoData(editTodoCardData[0]);
+
+      setTodoTitle(editTodoCardData[0].name);
+
+      setDate(new Date(editTodoCardData[0].reminder));
+
+      setTime(`${new Date(editTodoCardData[0].reminder).getHours()}:${new Date(editTodoCardData[0].reminder).getMinutes()}`);
+
+      setPrioritySelected(editTodoCardData[0].priority);
+
+      priorityClicked(document.querySelector(`.priority-flag#${editTodoCardData[0].priority}`));
+
+      setLabelValues([{
+        'label': editTodoCardData[0].label.name,
+        'value': editTodoCardData[0].label.name
+      }]);
+    }
+  }, []);
+
+  const getLabelsOptionsDisplay = useCallback(() => {
+    let labels = [];
+    if (stateStore !== undefined) {
+      labels =  _.map(_.cloneDeep(store.getState()).todoistDashboard.labels, (labelsOption)=>{
+        return {
+          "label": labelsOption.name,
+          "value": labelsOption.name
+        }
+      })
+    }
+    
+    return labels;
+  });
+
+  const [labelsOptionsList, setLabelsOptionsList] = useState(getLabelsOptionsDisplay());
+  
+  const updateDateAndTime = useCallback(()=>{
     const getDate = date;
     const getTime = time;
     if (getDate !== null && getTime !== null) {
@@ -88,53 +137,99 @@ const TodoModal = (props) => {
   const [todoTitle, setTodoTitle] = useState('');
   const [notifyOnSubmitError, setNotifyOnSubmitError] = useState(false);
   const [selectedLabelID, setselectedLabelID] = useState('');
-  const onDateChange = useCallback(async (dateUpdated) => {
+  const onDateChange = useCallback(async (dateUpdated)=>{
     setDate(dateUpdated);
-    setDateAndTime(updateDateAndTime().toUTCString());
+    setDateAndTime(updateDateAndTime().toISOString());  
   });
   const onTimeChange = useCallback(async (timeUpdated) => {
     setTime(timeUpdated);
-    setDateAndTime(updateDateAndTime().toUTCString());
+    setDateAndTime(updateDateAndTime().toISOString());  
   });
 
+  const applyInitialState = useCallback(() => {
+    setTodoTitle('');
+    setDate(new Date());
+    setTime('23:59');
+    setLabelValues([]);
+  });
+
+  const priorityClicked = useCallback((target) => {
+
+    const priorityFlags = document.querySelectorAll('.priority-flag');
+
+    _.map(priorityFlags, (priorityFlag) => {
+      priorityFlag.style.opacity = '0.5';
+      priorityFlag.style.transform = 'scale(1)';
+    });
+
+    setPrioritySelected(target.id);
+
+    target.style.opacity = '1';
+    target.style.transform = 'scale(1.5)';
+  });
+ 
   const applyChanges = useCallback(async () => {
-    if (todoTitle.trim() !== '') {
+    if(todoTitle.trim() !== '') {
       const res = await Dunzo.createTodo({
         name: todoTitle,
         label: _.isEmpty(selectedLabelID) ? null : selectedLabelID,
+        priority: prioritySelected !== '' ? prioritySelected : "LOW",
         reminder: dateAndTime,
       });
+
+      if (res.status === 200) {
+        store.dispatch(dashboardTodoistUpdate(res.data));
+      }
       register();
       props.toggle();
     } else {
       setNotifyOnSubmitError(!notifyOnSubmitError);
     }
+    applyInitialState();
   });
-  const selectedLabelOptions = useCallback(async (selectedLabel) => {
-    if (!_.isEmpty(selectedLabel)) {
-      const selectLabel = _.filter(
-        stateStore.todoistDashboard.labels,
-        (labelsOption) => {
-          return selectedLabel[0].value == labelsOption.name;
-        }
-      );
-      if (!_.isEmpty(selectLabel)) {
+
+  const saveChanges = useCallback(async () => {
+    if(todoTitle.trim() !== '') {
+      const res = await Dunzo.editTodo({name: todoTitle, priority: prioritySelected !== '' ? prioritySelected : "LOW", label: _.isEmpty(selectedLabelID) ? null : selectedLabelID, reminder: dateAndTime }, editTodoData._id);
+
+      if (res.status === 200) {
+        store.dispatch(dashboardTodoistUpdate(res.data));
+      }
+      props.toggle();
+    } else{
+      setNotifyOnSubmitError(!notifyOnSubmitError)
+    }
+
+    applyInitialState();
+  });
+
+  const selectedLabelOptions = useCallback(async (selectedLabel)=> {
+    if(!_.isUndefined(selectedLabel)){
+        const selectLabel = _.filter(stateStore.todoistDashboard.labels, (labelsOption)=>{
+        return selectedLabel[0].value == labelsOption.name;
+      })
+      if(!_.isEmpty(selectLabel)){
         setselectedLabelID(selectLabel[0]._id);
       } else {
         const res = await Dunzo.createLabel({name: selectedLabel[0].value});
         setselectedLabelID(res.data._id);
-        // let tempStateStore = _.cloneDeep(stateStore);
-        // tempStateStore.todoistDashboard.labels = [...tempStateStore.todoistDashboard.labels, res.data];
-        // setStateStore(tempStateStore);
-        // dispatch(dashboardTodoistUpdate(stateStore.todoistDashboard));
+         if (res.status === 200) {
+           store.dispatch(dashboardTodoistUpdate(res.data));
+         }
       }
     }
+
+    setLabelValues(selectedLabel);
   });
 
   return (
     <div>
       <Modal isOpen={props.modal} toggle={props.toggle} className={className}>
-        <ModalHeader toggle={props.toggle}>Add Todo</ModalHeader>
+        { _.isUndefined(editTodoData) ?
+          <ModalHeader toggle={props.toggle}>Add Todo</ModalHeader> :
+          <ModalHeader toggle={props.toggle}>Edit Todo</ModalHeader>
+        }
+        
         <ModalBody>
           <div className='text-center py-6'>
             <span className='todo-modal-label'>
@@ -172,56 +267,92 @@ const TodoModal = (props) => {
           <div className='text-center py-6'>
             <span className='todo-modal-label'>Priority</span>
             <span>
-              <a>
-                <PriorityFlag fill='#b23b47' opacity='0.5' />
+              <a id='HIGH' className="priority-flag" title="HIGH" onClick={e => priorityClicked(e.currentTarget)} style={{opacity: '0.5', display: 'inline-block', margin: '.5rem'}} >
+                <PriorityFlag id='HIGH' data-id="HIGH"  fill='#b23b47' />
               </a>
-              <a>
-                <PriorityFlag fill='orange' />
+              <a id="MEDIUM" className="priority-flag" title="MEDIUM" onClick={e => priorityClicked(e.currentTarget)} style={{opacity: '0.5', display: 'inline-block', margin: '.5rem'}}>
+                <PriorityFlag data-id="MEDIUM" id="MEDIUM"  fill='orange' />
               </a>
-              <a>
-                <PriorityFlag fill='green' />
+              <a id="LOW" className="priority-flag" title="LOW" onClick={e => priorityClicked(e.currentTarget)} style={{opacity: '1', display: 'inline-block', margin: '.5rem', transform: 'scale(1.5)'}}>
+                <PriorityFlag data-id="LOW" id="LOW"  fill='green' />
               </a>
             </span>
-          </div>
-          <div>
+        </div>
+        <div>
+        { _.isUndefined(editTodoData) ?
             <Select
-              noDataRenderer={() => {
-                return (
-                  <>
-                    <p
-                      style={{
-                        borderTop: '1px solid #4a4a49',
-                        padding: '.5rem 0',
-                        marginBottom: '0',
-                      }}
-                      className='text-center'>
-                      No Label
-                    </p>
-                  </>
-                );
-              }}
-              clearable
-              placeholder='Add/Select Label'
-              options={labelsOptionsList}
-              className='modal-label-selector'
-              createNewLabel='+ Add Label'
-              create
-              separator
-              onChange={selectedLabelOptions}
-              dropdownHandle
-              labelField='label'
-              valueField='value'
-              backspaceDelete
+                noDataRenderer={() => {
+                  return (
+                    <>
+                      <p
+                        style={{
+                          borderTop: '1px solid #4a4a49',
+                          padding: '.5rem 0',
+                          marginBottom: '0',
+                        }}
+                        className='text-center'>
+                        No Label
+                      </p>
+                    </>
+                  );
+                }}
+                clearable
+                placeholder="Add/Select Label"
+                options={labelsOptionsList}
+                className="modal-label-selector"
+                createNewLabel="+ Add Label"
+                create
+                values={labelValues}
+                separator
+                onChange={selectedLabelOptions}
+                dropdownHandle
+                labelField="label"
+                valueField="value"
+                backspaceDelete
+                searchable
+            /> :
+            <Select
+                noDataRenderer={() => {
+                  return (
+                    <>
+                      <p
+                        style={{
+                          borderTop: '1px solid #4a4a49',
+                          padding: '.5rem 0',
+                          marginBottom: '0',
+                        }}
+                        className='text-center'>
+                        No Label
+                      </p>
+                    </>
+                  );
+                }}
+                clearable
+                values={labelValues}
+                placeholder="Add/Select Label"
+                options={labelsOptionsList}
+                className="modal-label-selector"
+                createNewLabel="+ Add Label"
+                values={labelValues}
+                create
+                separator
+                onChange={selectedLabelOptions}
+                dropdownHandle
+                labelField="label"
+                valueField="value"
+                backspaceDelete
+                searchable
             />
-          </div>
+        }
+        </div>
         </ModalBody>
         <ModalFooter>
-          <Button className='red' onClick={applyChanges}>
-            Apply changes
-          </Button>{' '}
-          <Button color='secondary' onClick={props.toggle}>
-            Cancel
-          </Button>
+        { (_.isUndefined(state)) ?
+          <Button className="red" onClick={applyChanges}>Apply changes</Button> :
+          <Button className="red" onClick={saveChanges}>Save changes</Button>
+        }
+          
+          {' '}<Button color="secondary" onClick={props.toggle}>Cancel</Button>
         </ModalFooter>
       </Modal>
     </div>

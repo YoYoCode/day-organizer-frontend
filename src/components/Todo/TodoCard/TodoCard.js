@@ -11,6 +11,12 @@ export default class TodoCard extends Component {
     };
   }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return {
+      todoSectionData: nextProps.data
+    };
+  }
+
   render () {
     return (
       <div className="accordion__wrapper">
@@ -22,8 +28,8 @@ export default class TodoCard extends Component {
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="0">
               <Card.Body>
-                {this.state.todoSectionData.map((b) => {
-                  return (<Todo data={b} key={b.name} />);
+                {this.state.todoSectionData.map((todoData) => {
+                  return (<Todo data={todoData} sectionName={this.props.sectionName} key={todoData.name} />);
                 })}
               </Card.Body>
             </Accordion.Collapse>

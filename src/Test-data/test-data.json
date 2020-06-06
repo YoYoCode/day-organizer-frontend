@@ -9,6 +9,7 @@
         "_id": "5ed3c572bd002437aac450cd",
         "name": "Test Label 1"
       },
+      "priority": "HIGH",
       "reminder": "2020-05-16T16:19:41.889Z",
       "createdAt": "2020-05-31T14:55:56.625Z",
       "updatedAt": "2020-05-31T14:55:56.625Z"
@@ -22,6 +23,7 @@
         "_id": "5ed3c572bd002437aac450cd",
         "name": "Test Label 1"
       },
+      "priority": "LOW",
       "reminder": "2020-06-16T16:19:41.889Z",
       "createdAt": "2020-05-31T15:00:20.486Z",
       "updatedAt": "2020-05-31T15:00:20.486Z"
@@ -35,6 +37,7 @@
         "_id": "5ed3c572bd002437aac450cd",
         "name": "Test Label 1"
       },
+      "priority": "MEDIUM",
       "reminder": "2020-06-06T16:19:41.889Z",
       "createdAt": "2020-05-31T15:56:55.515Z",
       "updatedAt": "2020-05-31T15:56:55.515Z"
@@ -50,6 +53,7 @@
         "_id": "5ed3c572bd002437aac450cd",
         "name": "Test Label 1"
       },
+      "priority": "LOW",
       "reminder": "2020-05-16T16:19:41.889Z",
       "createdAt": "2020-05-31T14:55:56.625Z",
       "updatedAt": "2020-05-31T14:55:56.625Z"
@@ -63,6 +67,7 @@
         "_id": "5ed3c572bd002437aac450cd",
         "name": "Test Label 1"
       },
+      "priority": "HIGH",
       "reminder": "2020-06-16T16:19:41.889Z",
       "createdAt": "2020-05-31T15:00:20.486Z",
       "updatedAt": "2020-05-31T15:00:20.486Z"
@@ -76,6 +81,7 @@
         "_id": "5ed3c572bd002437aac450cd",
         "name": "Test Label 1"
       },
+      "priority": "MEDIUM",
       "reminder": "2020-06-06T16:19:41.889Z",
       "createdAt": "2020-05-31T15:56:55.515Z",
       "updatedAt": "2020-05-31T15:56:55.515Z"
@@ -91,6 +97,7 @@
         "_id": "5ed3c572bd002437aac450cd",
         "name": "Test Label 1"
       },
+      "priority": "MEDIUM",
       "reminder": "2020-05-16T16:19:41.889Z",
       "createdAt": "2020-05-31T14:55:56.625Z",
       "updatedAt": "2020-05-31T14:55:56.625Z"
@@ -104,6 +111,7 @@
         "_id": "5ed3c572bd002437aac450cd",
         "name": "Test Label 1"
       },
+      "priority": "HIGH",
       "reminder": "2020-06-16T16:19:41.889Z",
       "createdAt": "2020-05-31T15:00:20.486Z",
       "updatedAt": "2020-05-31T15:00:20.486Z"
@@ -117,6 +125,7 @@
         "_id": "5ed3c572bd002437aac450cd",
         "name": "Test Label 1"
       },
+      "priority": "HIGH",
       "reminder": "2020-06-06T16:19:41.889Z",
       "createdAt": "2020-05-31T15:56:55.515Z",
       "updatedAt": "2020-05-31T15:56:55.515Z"
@@ -132,6 +141,7 @@
         "_id": "5ed3c572bd002437aac450cd",
         "name": "Test Label 1"
       },
+      "priority": "HIGH",
       "reminder": "2020-05-16T16:19:41.889Z",
       "createdAt": "2020-05-31T14:55:56.625Z",
       "updatedAt": "2020-05-31T14:55:56.625Z"
@@ -145,6 +155,7 @@
         "_id": "5ed3c572bd002437aac450cd",
         "name": "Test Label 1"
       },
+      "priority": "LOW",
       "reminder": "2020-06-16T16:19:41.889Z",
       "createdAt": "2020-05-31T15:00:20.486Z",
       "updatedAt": "2020-05-31T15:00:20.486Z"
@@ -158,6 +169,7 @@
         "_id": "5ed3c572bd002437aac450cd",
         "name": "Test Label 1"
       },
+      "priority": "LOW",
       "reminder": "2020-06-06T16:19:41.889Z",
       "createdAt": "2020-05-31T15:56:55.515Z",
       "updatedAt": "2020-05-31T15:56:55.515Z"

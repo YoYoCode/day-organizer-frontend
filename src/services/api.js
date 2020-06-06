@@ -34,10 +34,18 @@ const Dunzo = {
     });
   },
 
+  editTodo: async (todoInfo, todoId) => {
+    return courier({
+      method: 'PATCH',
+      url: `https://todo-hackathon.herokuapp.com/api/v1/tasks/${todoId}`,
+      data: todoInfo,
+    });
+  }, 
+
   createTodo: async (todoInfo) => {
     return courier({
       method: 'POST',
-      url: 'https://todo-hackathon.herokuapp.com/api/v1/tasks',
+      url: `https://todo-hackathon.herokuapp.com/api/v1/tasks`,
       data: todoInfo,
     });
   },
@@ -61,6 +69,13 @@ const Dunzo = {
       method: 'GET',
       url: `https://todo-hackathon.herokuapp.com/api/v1/tasks`,
       params: statusInfo
+    });
+  },
+
+  getAllTasksStatusActive: async () => {
+    return courier({
+      method: 'GET',
+      url: `https://todo-hackathon.herokuapp.com/api/v1/tasks`,
     });
   },
 };
