@@ -70,7 +70,6 @@ $col-bg-light : $col-light-cream;
 
 .main-layout-row {
   height: 100vh;
-  margin-top: 3.5rem;
 }
  
 
@@ -86,6 +85,9 @@ $col-bg-light : $col-light-cream;
       // border: 2px solid #b23b47 !important;
       max-height: 450px;
       overflow: auto;
+    }
+    .card-body.full {
+      max-height: 80vh;
     }
   }
 }
@@ -343,6 +345,7 @@ $col-bg-light : $col-light-cream;
 
 .todo-main-section{
   padding:1rem 0 2rem;
+  margin-top: 3.5rem;
 }
 
 
@@ -362,6 +365,7 @@ $col-bg-light : $col-light-cream;
 }
 .labels-menu{
   padding:1.5rem;
+  margin-top: 3.5rem;
 }
 .login-card.card{
   background-color: transparent !important;
@@ -445,7 +449,7 @@ $col-bg-light : $col-light-cream;
   }
 }
 
-.nav-add-label__wrapper{
+.nav-add-label__wrapper {
   input{
     border: none !important;
     background-color: transparent !important;
@@ -458,6 +462,16 @@ $col-bg-light : $col-light-cream;
   div:first-child{
    // overflow-x: hidden;
   }
+
+  .left-menu {
+    input {
+      color: $col-light-cream !important;
+      &::placeholder {
+        color: $col-light-cream;
+      }
+    }
+  }
+
   .react-dropdown-select-dropdown-handle,.react-dropdown-select-clear{
     display: none !important;
   }

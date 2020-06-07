@@ -24,14 +24,17 @@ const MainArea = (props) => {
     setDashboardSectionData(store.getState());
   }, []);
 
-  let storeSubscription = store.subscribe(
-    () => {
-      setDashboardSectionData(store.getState());
-    }
-  );
+  
 
   useEffect(() => {
-    storeSubscription();
+    const storeSubscription = store.subscribe(
+      () => {
+        setDashboardSectionData(store.getState());
+      }
+    );
+    return () => {
+      storeSubscription();
+    }
   }, []);
 
   const [showInbox,setShowInbox] = useState(true);
@@ -45,24 +48,50 @@ const MainArea = (props) => {
    
     if(customType === 'Label') {
       const currentLabelId = e.currentTarget.id;
+
+      const selectLabel = _.filter(dashboardSectionData.todoistDashboard.labels, (labelsOption)=>{
+          return currentLabelId == labelsOption._id;
+      });
+  
+
       const res = await Dunzo.getTasksByLabel({"label": currentLabelId});
       if(res.status === 200){
-        setCustomTodoData(res.data);
+        setCustomTodoData({
+          "sectionName": selectLabel[0].name,
+          "data": res.data,
+          "sectionType": "Label",
+          'className': 'full'
+        });
       } 
 
     } else if(customType === 'Priority'){
       const currentPriorityType = e.currentTarget.id;
       const res = await Dunzo.getTasksByPriority({"priority": currentPriorityType});
       if(res.status === 200){
-        setCustomTodoData(res.data);
+        setCustomTodoData({
+          "sectionName": `Priority ${_.capitalize(currentPriorityType)}` ,
+          "data": res.data,
+          'className': 'full',
+          "sectionType": "Priority"
+        });
       }
-    } else if(customType === 'Completed'){
+
+    } else if(customType === 'Completed') {
       const currentStatusType = e.currentTarget.id;
       const res = await Dunzo.getTasksByStatus({"status": currentStatusType});
       if(res.status === 200){
-        setCustomTodoData(res.data);
+        setCustomTodoData({
+          "sectionName": `Completed`,
+          "data": res.data,
+          'className': 'full',
+          "sectionType": "Completed"
+        });
       }
     }
+
+    _.map(document.querySelectorAll('.completed'), (completedNode) => {
+      completedNode.classList.remove('completed');
+    });
   });
 
   const onShowInbox = useCallback(()=>{
@@ -77,7 +106,7 @@ const MainArea = (props) => {
         store.dispatch(dashboardTodoistUpdate(res.data));
       }
     }
-    
+
   });
 
   return (
@@ -97,7 +126,7 @@ const MainArea = (props) => {
                           noDataRenderer={()=>{ return <></> }}
                           clearable
                           placeholder="Add Label"
-                          className="modal-label-selector"
+                          className="modal-label-selector left-menu"
                           createNewLabel="+ Add Label"
                           create
                           labelField="label"

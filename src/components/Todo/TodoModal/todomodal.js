@@ -55,10 +55,44 @@ const TodoModal = (props) => {
   const [labelValues, setLabelValues] = useState([]);
   const [prioritySelected, setPrioritySelected] = useState('LOW');
 
+  const settingProps = async () => {
+    await setPropsEditData(props.state);
+  };
+
   useEffect(() => {
-    setStateStore(_.cloneDeep(store.getState()));
-    setLabelsOptionsList(getLabelsOptionsDisplay());
-  }, []);
+    settingProps();
+
+    if (_.has(propsEditData, 'todoId') && _.get(propsEditData, 'todoId') !== null) {
+      // const editTodoCardData = _.filter(_.cloneDeep(stateStore.todoistDashboard[propsEditData.sectionName.toLowerCase()]), (todoData) => {
+      //   return todoData._id === state.todoId;
+      // });
+  
+      setEditTodoData(propsEditData.todoCardData);
+
+      setTodoTitle(propsEditData.todoCardData.name);
+
+      setDate(new Date(propsEditData.todoCardData.reminder));
+
+      setTime(`${new Date(propsEditData.todoCardData.reminder).getHours()}:${(new Date(propsEditData.todoCardData.reminder).getMinutes()<10?'0':'')  + new Date(propsEditData.todoCardData.reminder).getMinutes()}`);
+
+      setPrioritySelected(propsEditData.todoCardData.priority);
+
+      priorityClicked(document.querySelector(`.priority-flag#${propsEditData.todoCardData.priority}`));
+
+      if (!_.isNull(propsEditData.todoCardData.label)) {
+        setLabelValues([{
+          'label': propsEditData.todoCardData.label.name,
+          'value': propsEditData.todoCardData.label.name
+        }]);
+      }
+    }
+
+  }, [props.state]);
+
+  useEffect(() => {
+    const dateAndTime = updateDateAndTime();
+    settingDateAndTime(dateAndTime.toISOString());
+  }, [date, time]);
 
   useEffect(() => {
     const subscription = store.subscribe(() => {
@@ -68,31 +102,6 @@ const TodoModal = (props) => {
 
     return () => {
       subscription();
-    }
-  });
-
-  useEffect(() => {
-    if (_.has(propsEditData, 'todoId') && _.get(propsEditData, 'todoId') !== null) {
-      const editTodoCardData = _.filter(_.cloneDeep(stateStore.todoistDashboard[propsEditData.sectionName.toLowerCase()]), (todoData) => {
-        return todoData._id === state.todoId;
-      });
-  
-      setEditTodoData(editTodoCardData[0]);
-
-      setTodoTitle(editTodoCardData[0].name);
-
-      setDate(new Date(editTodoCardData[0].reminder));
-
-      setTime(`${new Date(editTodoCardData[0].reminder).getHours()}:${new Date(editTodoCardData[0].reminder).getMinutes()}`);
-
-      setPrioritySelected(editTodoCardData[0].priority);
-
-      priorityClicked(document.querySelector(`.priority-flag#${editTodoCardData[0].priority}`));
-
-      setLabelValues([{
-        'label': editTodoCardData[0].label.name,
-        'value': editTodoCardData[0].label.name
-      }]);
     }
   }, []);
 
@@ -133,17 +142,29 @@ const TodoModal = (props) => {
       return todayDate;
     }
   });
-  const [dateAndTime, setDateAndTime] = useState(updateDateAndTime());
+  const [dateAndTime, setDateAndTime] = useState('');
   const [todoTitle, setTodoTitle] = useState('');
   const [notifyOnSubmitError, setNotifyOnSubmitError] = useState(false);
   const [selectedLabelID, setselectedLabelID] = useState('');
-  const onDateChange = useCallback(async (dateUpdated)=>{
-    setDate(dateUpdated);
-    setDateAndTime(updateDateAndTime().toISOString());  
+
+
+  const settingDate = async (dateUpdated) => {
+    await setDate(dateUpdated);
+  };
+
+  const settingTime = async (timeUpdated) => {
+    await setTime(timeUpdated);
+  };
+
+  const settingDateAndTime = async (dateAndTimeUpdated) => {
+    await setDateAndTime(dateAndTimeUpdated);
+  };
+  
+  const onDateChange = useCallback(async (dateUpdated) => {
+    await settingDate(dateUpdated);
   });
   const onTimeChange = useCallback(async (timeUpdated) => {
-    setTime(timeUpdated);
-    setDateAndTime(updateDateAndTime().toISOString());  
+    await settingTime(timeUpdated);
   });
 
   const applyInitialState = useCallback(() => {
@@ -155,17 +176,19 @@ const TodoModal = (props) => {
 
   const priorityClicked = useCallback((target) => {
 
-    const priorityFlags = document.querySelectorAll('.priority-flag');
+    if (!_.isNull(target)) {
+      const priorityFlags = document.querySelectorAll('.priority-flag');
 
-    _.map(priorityFlags, (priorityFlag) => {
-      priorityFlag.style.opacity = '0.5';
-      priorityFlag.style.transform = 'scale(1)';
-    });
+      _.map(priorityFlags, (priorityFlag) => {
+        priorityFlag.style.opacity = '0.5';
+        priorityFlag.style.transform = 'scale(1)';
+      });
 
-    setPrioritySelected(target.id);
+      setPrioritySelected(target.id);
 
-    target.style.opacity = '1';
-    target.style.transform = 'scale(1.5)';
+      target.style.opacity = '1';
+      target.style.transform = 'scale(1.5)';
+    }
   });
  
   const applyChanges = useCallback(async () => {
@@ -204,19 +227,24 @@ const TodoModal = (props) => {
   });
 
   const selectedLabelOptions = useCallback(async (selectedLabel)=> {
-    if(!_.isUndefined(selectedLabel)){
-        const selectLabel = _.filter(stateStore.todoistDashboard.labels, (labelsOption)=>{
+    if(!_.isUndefined(selectedLabel) && !_.isEmpty(selectedLabel) && !_.isEmpty(selectedLabel[0])){
+      const selectLabel = _.filter(stateStore.todoistDashboard.labels, (labelsOption)=>{
         return selectedLabel[0].value == labelsOption.name;
       })
       if(!_.isEmpty(selectLabel)){
         setselectedLabelID(selectLabel[0]._id);
       } else {
         const res = await Dunzo.createLabel({name: selectedLabel[0].value});
-        setselectedLabelID(res.data._id);
+        const selectLabel = _.filter(res.data.labels, (labelsOption)=>{
+          return selectedLabel[0].value == labelsOption.name;
+        })
+        setselectedLabelID(selectLabel[0]._id);
          if (res.status === 200) {
            store.dispatch(dashboardTodoistUpdate(res.data));
          }
       }
+    } else if (!_.isEmpty(selectedLabel)) {
+      setselectedLabelID(null);
     }
 
     setLabelValues(selectedLabel);
