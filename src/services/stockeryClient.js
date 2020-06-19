@@ -2,14 +2,14 @@ import axios from 'axios';
 
 const client = () => {
   const defaultOptions = {
-    baseURL: 'https://todo-hackathon.herokuapp.com/api/v1',
+    baseURL: 'http://localhost:8005/api/v1',
     headers: {
       'Content-Type': 'application/json',
     },
   };
   const courier = axios.create(defaultOptions);
 
-  courier.interceptors.request.use(config => {
+  courier.interceptors.request.use((config) => {
     // TODO: Look into this later
     /* const token = localStorage.getItem('token');
     config.headers.Authorization = token ? `Bearer ${token}` : ''; */

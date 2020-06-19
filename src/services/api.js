@@ -5,7 +5,7 @@ const Dunzo = {
   loginUser: async (userCredentials) => {
     return axios({
       method: 'POST',
-      url: 'https://todo-hackathon.herokuapp.com/auth/login',
+      url: 'http://localhost:8005/auth/login',
       data: userCredentials,
     });
   },
@@ -13,7 +13,7 @@ const Dunzo = {
   signUpUser: async (userCredentials) => {
     return axios({
       method: 'POST',
-      url: 'https://todo-hackathon.herokuapp.com/api/v1/users',
+      url: 'http://localhost:8005/api/v1/users',
       data: userCredentials,
     });
   },
@@ -21,7 +21,7 @@ const Dunzo = {
   notificationSubscriber: async (subscription) => {
     return axios({
       method: 'POST',
-      url: 'https://todo-hackathon.herokuapp.com/api/v1/subscribe',
+      url: 'http://localhost:8005/api/v1/subscribe',
       data: subscription,
     });
   },
@@ -29,7 +29,7 @@ const Dunzo = {
   createLabel: async (labelInfo) => {
     return courier({
       method: 'POST',
-      url: 'https://todo-hackathon.herokuapp.com/api/v1/labels',
+      url: 'http://localhost:8005/api/v1/labels',
       data: labelInfo,
     });
   },
@@ -37,15 +37,15 @@ const Dunzo = {
   editTodo: async (todoInfo, todoId) => {
     return courier({
       method: 'PATCH',
-      url: `https://todo-hackathon.herokuapp.com/api/v1/tasks/${todoId}`,
+      url: `http://localhost:8005/api/v1/tasks/${todoId}`,
       data: todoInfo,
     });
-  }, 
+  },
 
   createTodo: async (todoInfo) => {
     return courier({
       method: 'POST',
-      url: `https://todo-hackathon.herokuapp.com/api/v1/tasks`,
+      url: `http://localhost:8005/api/v1/tasks`,
       data: todoInfo,
     });
   },
@@ -53,31 +53,31 @@ const Dunzo = {
   getTasksByLabel: async (labelInfo) => {
     return courier({
       method: 'GET',
-      url: `https://todo-hackathon.herokuapp.com/api/v1/tasks`,
-      params: labelInfo
+      url: `http://localhost:8005/api/v1/tasks`,
+      params: labelInfo,
     });
   },
   getTasksByPriority: async (priorityInfo) => {
     return courier({
       method: 'GET',
-      url: `https://todo-hackathon.herokuapp.com/api/v1/tasks`,
-      params: priorityInfo
+      url: `http://localhost:8005/api/v1/tasks`,
+      params: priorityInfo,
     });
   },
   getTasksByStatus: async (statusInfo) => {
     return courier({
       method: 'GET',
-      url: `https://todo-hackathon.herokuapp.com/api/v1/tasks`,
-      params: statusInfo
+      url: `http://localhost:8005/api/v1/tasks`,
+      params: statusInfo,
     });
   },
 
   getAllTasksStatusActive: async () => {
     return courier({
       method: 'GET',
-      url: `https://todo-hackathon.herokuapp.com/api/v1/tasks`,
+      url: `http://localhost:8005/api/v1/tasks`,
     });
   },
 };
 
-export {Dunzo};
+export { Dunzo };
